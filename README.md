@@ -22,11 +22,10 @@
 ## 📁 Project Structure
 
 ```
-nishsworld-fullstack/
-├── client/           # React frontend
-├── server/           # Express backend
-├── shared/           # Shared types
-├── original-files/   # Original HTML/CSS files
+nishsworld/
+├── client/           # React frontend (TypeScript + Vite)
+├── server/           # Express backend (TypeScript + MongoDB)
+├── shared/           # Shared TypeScript types
 └── README.md
 ```
 
