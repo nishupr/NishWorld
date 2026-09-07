@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NISH'S WORLD</title>
+    <link rel="stylesheet" href="design.css"> 
+</head>
+<body>
+    <h1>Choose Your Character</h1>
+    <h3>This is where your journey continues... Pick your own characters and dive into a new world.</h3>
+</body>
+</html> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .character-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .character-pair {
+            display: flex;
+            gap: 20px;
+        }
+        .character-card {
+            width: 220px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .character-card:hover {
+            transform: scale(1.05);
+        }
+        .character-card img {
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="character-grid">
+        <!-- Pair 1: Lexi & Alex -->
+        <div class="character-pair">
+            <div class="character-card" onclick="selectCharacter('🎤 Lexi: The Rockstar with a Heart')">
+                <img src="https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg" alt="Lexi">
+                <h2>Lexi</h2>
+                <p>Embodying the ultimate rockstar vibe, Lexi is bold, confident, and full of energy.</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter('🎸 Alex: The Melody of Dreams')">
+                <img src="https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg" alt="Alex">
+                <h2>Alex</h2>
+                <p>With a guitar in hand and a fearless attitude, Alex lives for the thrill of music.</p>
+            </div>
+        </div>
+        
+        <!-- Pair 2: Bella & Kai -->
+        <div class="character-pair">
+            <div class="character-card" onclick="selectCharacter('🌸 Bella: The Secret of Evermist Academy')">
+                <img src="https://w0.peakpx.com/wallpaper/644/678/HD-wallpaper-school-vibes-anime-girl-cute-sky-view-uniform.jpg" alt="Bella">
+                <h2>Bella</h2>
+                <p>Sweet and playful, Bella finds joy in the simplest moments, spreading warmth wherever she goes.</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter('⚡ Kai: Rooftops & Revelations')">
+                <img src="https://picture.lk/files/preview/960x1713/11710586104humg5hwn8tj3klyjym0q3xsg3aqcqavfxgfnjn6vzdexsginvqie52pfpiml81lkdwjj27mthgnou4h8cyayv6inhkmikcxhmsoy.jpg" alt="Kai">
+                <h2>Kai</h2>
+                <p>Playful and full of mischief, Kai brings excitement and adventure to every moment.</p>
+            </div>
+        </div>
+        
+        <!-- Pair 3: Luna & Vik -->
+        <div class="character-pair">
+            <div class="character-card" onclick="selectCharacter('🌙 Luna: The Silent Flame')">
+                <img src="https://i.pinimg.com/236x/6d/4a/22/6d4a2216ef416deaaabf03def93dc550.jpg" alt="Luna">
+                <h2>Luna</h2>
+                <p>Strong and independent, Luna is a force to be reckoned with, always forging her own path.</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter('🛡️ Vik: Shadows of the Forgotten')">
+                <img src="https://i.pinimg.com/736x/44/d9/29/44d9296e901703500ad2d470008a6e24.jpg" alt="Vik">
+                <h2>Vik</h2>
+                <p>Determined and resilient, Vik faces every challenge head-on with unwavering strength.</p>
+            </div>
+        </div>
+        
+        <!-- Pair 4: Blaze & Zade -->
+        <div class="character-pair">
+            <div class="character-card" onclick="selectCharacter('🔥 Blaze: Burn the Rulebook')">
+                <img src="https://i.pinimg.com/736x/bb/2f/52/bb2f52ab166107088ef7153de6c5588a.jpg" alt="Blaze">
+                <h2>Blaze</h2>
+                <p>Rebellious and fearless, Blaze breaks the rules and challenges the norm with boldness.</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter('♟️ Zade: The Game of Shadows')">
+                <img src="https://cdn.talkie-ai.com/talkie/prod/img/abb520af-b4a5-41f6-8ca1-b750c80d1568.jpeg?x-oss-process=image/resize,w_1024/format,webp" alt="Zade">
+                <h2>Zade</h2>
+                <p>Charismatic and daring, Zade thrives on excitement and pushing the limits of possibility.</p>
+            </div>
+        </div>
+        
+        <!-- Pair 5: Sky & Rex -->
+        <div class="character-pair">
+            <div class="character-card" onclick="selectCharacter('🌩️ Sky: The Wildfire and the Wind')">
+                <img src="https://i.pinimg.com/564x/1d/7d/50/1d7d50bdace5fffda5ad58a390b8d3e4.jpg" alt="Sky">
+                <h2>Sky</h2>
+                <p>Fast-paced and full of energy, Sky never slows down, always chasing the next thrill.</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter('🏍️ Rex: The Pulse Beneath the Chaos')">
+                <img src="https://i.pinimg.com/736x/f9/0f/e3/f90fe34c5a50fec1bcd0b4cfa354cdef.jpg" alt="Rex">
+                <h2>Rex</h2>
+                <p>Driven by adrenaline and speed, Rex lives in the fast lane, always on the move.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       function selectCharacter(name) {
+    localStorage.setItem("selectedCharacterName", name);
+    window.location.href = "story.html";
+}
+    </script>
+    <h6>&nbsp;</h6>
+    <div>
+    <button id="girlquizButton">Girl Quiz</button>
+    <button id="boyquizButton">Boy Quiz</button>
+    </div>
+    &nbsp;
+    <footer><button id="gobackButton">Go Back</button></footer>
+    <script src="app.js"></script>
+</body>
+</html>

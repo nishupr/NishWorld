@@ -1,0 +1,239 @@
+body {
+    background: url('https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmlnaHQlMjBza3klMjB3YWxscGFwZXJ8ZW58MHx8MHx8fDA%3D') no-repeat center center fixed;
+    background-size: cover;
+    color: #dcdcdc;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 {
+    font-size: 4em;
+    text-shadow: 3px 3px 12px rgba(100, 100, 100, 0.8);
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: #dcdcdc;
+    margin-bottom: 10px;
+    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(220, 220, 220, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+}
+
+h3 {
+    font-size: 2em;
+    font-style: italic;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(80, 80, 80, 0.9);
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(220, 220, 220, 0.7);
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #dcdcdc;
+    background: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+} 
+
+p {
+    font-size: 1.3em;
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(60, 60, 60, 0.6);
+    line-height: 1.8;
+    animation: float 5s ease-in-out infinite;
+    display: inline-block;
+} 
+img {
+    width: 250px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  
+#goAheadButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#goAheadButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+} 
+#gobackButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#gobackButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+} 
+#boyquizButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#boyquizButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+} 
+#girlquizButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#girlquizButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+} 
+#gobackkButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#gobackkButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 40px 20px;
+}
+.question {
+  margin: 30px 0;
+}
+.options label {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+}
+#revealButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#revealButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+}
+#submitButton {
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#submitButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #000;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 1); 
+}
+.result {
+  margin-top: 50px;
+  font-size: 2.0em;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(220, 220, 220, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  display: inline-block;
+} 

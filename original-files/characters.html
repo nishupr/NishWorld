@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Your Character</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .characters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .character-card {
+      width: 220px;
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .character-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .character-card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .character-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pick Your Character</h1>
+  <div class="characters">
+    <div class="character-card" onclick="selectCharacter('Lexi')">
+      <img src="https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg" alt="Lexi" />
+      <p>Lexi</p>
+    </div>
+
+    <div class="character-card" onclick="selectCharacter('Alex')">
+      <img src="https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg" alt="Alex" />
+      <p>Alex</p>
+    </div>
+
+    
+  </div>
+
+  <script>
+    const characters = {
+      Lexi: {
+        name: "Lexi",
+        image: "https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg",
+        story: "Lexi embodies a rockstar vibe with fierce independence and bold charm."
+      },
+      Alex: {
+        name: "Alex",
+        image: "https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg",
+        story: "Alex shreds through life like a true rockstar, turning every moment into a concert of confidence."
+      }
+    };
+
+    function selectCharacter(name) {
+      localStorage.setItem("selectedCharacter", JSON.stringify(characters[name]));
+      window.location.href = "story.html";
+    }
+  </script>
+
+</body>
+</html>

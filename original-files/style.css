@@ -1,0 +1,21 @@
+h1 {
+    color: purple;
+    text-align: center;
+    text-decoration: underline;
+} h3 {
+    color:purple;
+    font-family: sans-serif;
+    text-align: center;
+    text-decoration: underline;
+} h4 {
+    color:purple;
+    font-family: sans-serif;
+} button {
+    background-color: silver;
+} a {
+    text-decoration: none;
+} p {
+    font-family: arial;
+} body {
+    background: lightpink;
+}

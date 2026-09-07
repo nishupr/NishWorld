@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Which Boy Are You? | NISH'S WORLD</title>
+  <link rel="stylesheet" href="design.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Which Boy from NISH'S WORLD Are You?</h1>
+    <form id="boyQuiz">
+      <div class="question">
+        <h3>Q1: What's your passion?</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="Alex"/> Music & performing</label>
+          <label><input type="radio" name="q1" value="Zade"/> Street art & rebellion</label>
+          <label><input type="radio" name="q1" value="Rex"/> Leadership & ambition</label>
+          <label><input type="radio" name="q1" value="Vik"/> Science & strategy</label>
+          <label><input type="radio" name="q1" value="Kai"/> Adventure & freedom</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>Q2: Your ideal weekend?</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="Alex"/> Playing guitar or songwriting</label>
+          <label><input type="radio" name="q2" value="Zade"/> Hanging with the crew downtown</label>
+          <label><input type="radio" name="q2" value="Rex"/> Planning your next move</label>
+          <label><input type="radio" name="q2" value="Vik"/> Gaming or hacking stuff</label>
+          <label><input type="radio" name="q2" value="Kai"/> Going on a spontaneous trip</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>Q3: What’s your biggest strength?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="Alex"/> Empathy</label>
+          <label><input type="radio" name="q3" value="Zade"/> Boldness</label>
+          <label><input type="radio" name="q3" value="Rex"/> Drive</label>
+          <label><input type="radio" name="q3" value="Vik"/> Intelligence</label>
+          <label><input type="radio" name="q3" value="Kai"/> Fearlessness</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>Q4: What's your fashion vibe?</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="Alex"/> Chill artist with style</label>
+          <label><input type="radio" name="q4" value="Zade"/> Bold and rebellious</label>
+          <label><input type="radio" name="q4" value="Rex"/> Sharp and confident</label>
+          <label><input type="radio" name="q4" value="Vik"/> Casual techie</label>
+          <label><input type="radio" name="q4" value="Kai"/> Sporty explorer</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>Q5: Pick your go-to hangout spot:</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="Alex"/> A cozy rooftop with a guitar</label>
+          <label><input type="radio" name="q5" value="Zade"/> Downtown streets with graffiti</label>
+          <label><input type="radio" name="q5" value="Rex"/> A high-rise café overlooking the city</label>
+          <label><input type="radio" name="q5" value="Vik"/> A tech hub or hacker lounge</label>
+          <label><input type="radio" name="q5" value="Kai"/> On top of a mountain or surfing a wave</label>
+        </div>
+      </div>
+
+      <button id="submitButton">Reveal My Character</button>
+    </form>
+    <div class="result" id="boyResult"></div>
+  </div>
+
+  <script>
+    document.getElementById('boyQuiz').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      const q4 = document.querySelector('input[name="q4"]:checked');
+      const q5 = document.querySelector('input[name="q5"]:checked');
+
+      if (!q1 || !q2 || !q3 || !q4 || !q5) return;
+
+      const results = [q1.value, q2.value, q3.value, q4.value, q5.value];
+      const counts = {};
+      results.forEach(val => {
+        counts[val] = (counts[val] || 0) + 1;
+      });
+
+      let maxCount = 0;
+      let finalResult = '';
+      for (let char in counts) {
+        if (counts[char] > maxCount) {
+          maxCount = counts[char];
+          finalResult = char;
+        }
+      }
+
+      document.getElementById('boyResult').textContent = `You are most like ${finalResult}!`;
+    });
+  </script>
+  <footer><button id="gobackkButton">Go Back</button></footer>
+  <script src="app.js"></script>
+</body>
+</html>
