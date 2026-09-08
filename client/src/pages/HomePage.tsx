@@ -23,7 +23,7 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div ref={containerRef} className="bg-white text-black">
+    <div ref={containerRef} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       {/* Hero Section - Chapter I */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-32">
         <motion.div
@@ -34,7 +34,8 @@ const HomePage = () => {
         >
           {/* Top Meta */}
           <motion.div 
-            className="flex justify-between items-start mb-16 text-sm text-gray-500"
+            className="flex justify-between items-start mb-16 text-sm"
+            style={{ color: 'var(--text-tertiary)' }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -63,7 +64,8 @@ const HomePage = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl"
+            className="text-xl md:text-2xl mb-12 max-w-2xl"
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
@@ -79,10 +81,10 @@ const HomePage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="px-4 py-2 bg-black text-white text-sm rounded-full">
+            <span className="px-4 py-2 text-sm rounded-full" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
               Open for exploration
             </span>
-            <span className="text-gray-400 text-sm">SCROLL</span>
+            <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>SCROLL</span>
           </motion.div>
         </motion.div>
 
@@ -96,7 +98,7 @@ const HomePage = () => {
       </section>
 
       {/* Chapter I - Introduction */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 bg-gray-50">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32" style={{ backgroundColor: 'var(--bg-secondary)' }}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -104,12 +106,12 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <p className="text-sm text-gray-400 mb-8">Chapter I</p>
+            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter I</p>
             <h2 className="text-5xl md:text-7xl font-light mb-16">Quick intro</h2>
 
             <div className="grid md:grid-cols-2 gap-16">
               <div>
-                <p className="text-xl md:text-2xl leading-relaxed text-gray-700">
+                <p className="text-xl md:text-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   Hi, I'm <span className="font-semibold">Nishu</span> — a storyteller 
                   with a passion for creating immersive narratives, rich characters, 
                   and emotional journeys that resonate.
@@ -117,14 +119,14 @@ const HomePage = () => {
               </div>
               <div className="space-y-8">
                 <div>
-                  <p className="text-sm text-gray-500 mb-2">Philosophy</p>
-                  <p className="text-lg italic text-gray-800">
+                  <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>Philosophy</p>
+                  <p className="text-lg italic" style={{ color: 'var(--text-secondary)' }}>
                     "Stories for the soul. Characters for the heart."
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500 mb-2">Beyond writing</p>
-                  <p className="text-gray-700">
+                  <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>Beyond writing</p>
+                  <p style={{ color: 'var(--text-secondary)' }}>
                     Anime aesthetics, emotional depth, character psychology, 
                     and the magic of human connection.
                   </p>
@@ -144,7 +146,7 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <p className="text-sm text-gray-400 mb-8">Chapter II</p>
+            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter II</p>
             <h2 className="text-5xl md:text-7xl font-light mb-16">The Characters</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -188,7 +190,7 @@ const HomePage = () => {
                     transition={{ delay: index * 0.1 }}
                     className="group cursor-pointer"
                   >
-                    <div className="aspect-[3/4] bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                    <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       <img 
                         src={character.image} 
                         alt={character.name}
@@ -197,15 +199,15 @@ const HomePage = () => {
                       />
                     </div>
                     <p className="text-lg font-medium mb-1">{character.name}</p>
-                    <p className="text-sm text-gray-500 mb-2">{character.title}</p>
-                    <p className="text-xs text-gray-400 group-hover:text-black transition-colors">View story →</p>
+                    <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>{character.title}</p>
+                    <p className="text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>View story →</p>
                   </motion.div>
                 </Link>
               ))}
             </div>
 
             <Link to="/characters">
-              <button className="px-8 py-4 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
+              <button className="px-8 py-4 rounded-full transition-colors" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
                 View All Characters
               </button>
             </Link>
@@ -214,7 +216,7 @@ const HomePage = () => {
       </section>
 
       {/* Chapter III - What I Offer */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 bg-gray-50">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32" style={{ backgroundColor: 'var(--bg-secondary)' }}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -222,10 +224,10 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <p className="text-sm text-gray-400 mb-8">Chapter III</p>
+            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter III</p>
             <h2 className="text-5xl md:text-7xl font-light mb-16">What I offer?</h2>
 
-            <p className="text-2xl md:text-3xl text-gray-700 mb-16 max-w-3xl">
+            <p className="text-2xl md:text-3xl mb-16 max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
               Crafting emotional narratives with depth, authenticity, and connection.
             </p>
 
@@ -258,12 +260,13 @@ const HomePage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex gap-8 border-t border-gray-200 pt-8"
+                  className="flex gap-8 pt-8"
+                  style={{ borderTop: '1px solid var(--border-color)' }}
                 >
-                  <span className="text-sm text-gray-400 w-12">{item.num}</span>
+                  <span className="text-sm w-12" style={{ color: 'var(--text-tertiary)' }}>{item.num}</span>
                   <div className="flex-1">
                     <h3 className="text-2xl font-medium mb-3">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
+                    <p style={{ color: 'var(--text-secondary)' }}>{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -282,7 +285,7 @@ const HomePage = () => {
             transition={{ duration: 1 }}
             className="text-center"
           >
-            <p className="text-sm text-gray-400 mb-8">Chapter IV</p>
+            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter IV</p>
             <h2 className="text-6xl md:text-8xl font-light mb-12 leading-tight">
               Where stories
               <br />
@@ -291,12 +294,12 @@ const HomePage = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Link to="/characters">
-                <button className="px-10 py-5 bg-black text-white rounded-full hover:bg-gray-800 transition-all text-lg">
+                <button className="px-10 py-5 rounded-full transition-all text-lg" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
                   Explore Characters
                 </button>
               </Link>
               <Link to="/quiz/girl">
-                <button className="px-10 py-5 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all text-lg">
+                <button className="px-10 py-5 border-2 rounded-full transition-all text-lg" style={{ borderColor: 'var(--text-primary)' }}>
                   Take a Quiz
                 </button>
               </Link>
@@ -306,19 +309,20 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-12 lg:px-24 py-16 border-t border-gray-200">
+      <footer className="px-6 md:px-12 lg:px-24 py-16" style={{ borderTop: '1px solid var(--border-color)' }}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
-            <p className="text-sm text-gray-500 mb-2">AUTHOR & CREATOR</p>
+            <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>AUTHOR & CREATOR</p>
             <p className="text-2xl font-medium">Nishu Pundir</p>
-            <p className="text-gray-600 mt-1">A mind always wandering into realms unknown ♥</p>
+            <p className="mt-1" style={{ color: 'var(--text-secondary)' }}>A mind always wandering into realms unknown ♥</p>
           </div>
           <div className="flex gap-6">
             <a
               href="https://www.linkedin.com/in/nishu-pundir-33a188336"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="transition-colors"
+              style={{ color: 'var(--text-secondary)' }}
             >
               LinkedIn
             </a>
@@ -326,13 +330,14 @@ const HomePage = () => {
               href="https://www.instagram.com/hey.niish"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="transition-colors"
+              style={{ color: 'var(--text-secondary)' }}
             >
               Instagram
             </a>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-12 text-center text-sm text-gray-400">
+        <div className="max-w-7xl mx-auto mt-12 text-center text-sm" style={{ color: 'var(--text-tertiary)' }}>
           <p>© 2026 — nish's world — edition</p>
         </div>
       </footer>

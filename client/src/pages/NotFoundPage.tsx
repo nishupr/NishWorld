@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const NotFoundPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center px-6" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,14 +16,14 @@ const NotFoundPage = () => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-9xl font-light text-gray-200">404</h1>
+          <h1 className="text-9xl font-light" style={{ color: 'var(--border-color)' }}>404</h1>
         </motion.div>
         
         <h2 className="text-4xl md:text-5xl font-light mb-4">
           Page Not Found
         </h2>
         
-        <p className="text-gray-600 text-lg mb-8">
+        <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
           Looks like you've wandered into an unwritten chapter. 
           Let's get you back to the story.
         </p>
@@ -33,7 +33,8 @@ const NotFoundPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
+              className="px-8 py-4 rounded-full transition-colors"
+              style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}
             >
               Go Home
             </motion.button>
@@ -42,7 +43,8 @@ const NotFoundPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all"
+              className="px-8 py-4 border-2 rounded-full transition-all"
+              style={{ borderColor: 'var(--text-primary)' }}
             >
               View Characters
             </motion.button>

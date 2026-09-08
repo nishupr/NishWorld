@@ -34,7 +34,8 @@ const ScrollToTopButton = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-40 p-4 bg-black text-white rounded-full shadow-lg hover:bg-gray-800 transition-colors"
+          className="fixed bottom-8 right-8 z-40 p-4 rounded-full shadow-lg transition-colors"
+          style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}
           aria-label="Scroll to top"
         >
           <svg

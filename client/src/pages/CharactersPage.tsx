@@ -124,7 +124,7 @@ const CharactersPage = () => {
     : characters.filter(c => c.gender === filter)
 
   return (
-    <div className="bg-white text-black min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         
         {/* Header */}
@@ -134,11 +134,11 @@ const CharactersPage = () => {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <p className="text-sm text-gray-400 mb-4">The Universe</p>
+          <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>The Universe</p>
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
             Meet the Characters
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
+          <p className="text-xl max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
             10 souls, each with their own journey. Rich backstories, 
             emotional depth, and unforgettable narratives.
           </p>
@@ -149,35 +149,36 @@ const CharactersPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="flex gap-4 mb-12 border-b border-gray-200 pb-6"
+          className="flex gap-4 mb-12 pb-6"
+          style={{ borderBottom: '1px solid var(--border-color)' }}
         >
           <button
             onClick={() => setFilter('all')}
-            className={`px-6 py-2 rounded-full text-sm transition-all ${
-              filter === 'all'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            className="px-6 py-2 rounded-full text-sm transition-all"
+            style={{
+              backgroundColor: filter === 'all' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
+              color: filter === 'all' ? 'var(--bg-primary)' : 'var(--text-secondary)'
+            }}
           >
             All Characters ({characters.length})
           </button>
           <button
             onClick={() => setFilter('female')}
-            className={`px-6 py-2 rounded-full text-sm transition-all ${
-              filter === 'female'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            className="px-6 py-2 rounded-full text-sm transition-all"
+            style={{
+              backgroundColor: filter === 'female' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
+              color: filter === 'female' ? 'var(--bg-primary)' : 'var(--text-secondary)'
+            }}
           >
             Female (5)
           </button>
           <button
             onClick={() => setFilter('male')}
-            className={`px-6 py-2 rounded-full text-sm transition-all ${
-              filter === 'male'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            className="px-6 py-2 rounded-full text-sm transition-all"
+            style={{
+              backgroundColor: filter === 'male' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
+              color: filter === 'male' ? 'var(--bg-primary)' : 'var(--text-secondary)'
+            }}
           >
             Male (5)
           </button>
@@ -195,7 +196,7 @@ const CharactersPage = () => {
             >
               <Link to={`/story/${character.id}`}>
                 {/* Image */}
-                <div className="aspect-[3/4] bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                   <img
                     src={character.image}
                     alt={character.name}
@@ -212,15 +213,15 @@ const CharactersPage = () => {
                       {character.name}
                     </h3>
                   </div>
-                  <p className="text-sm text-gray-600 italic">{character.title}</p>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <p className="text-sm italic" style={{ color: 'var(--text-secondary)' }}>{character.title}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
                     {character.description}
                   </p>
                   <div className="flex items-center gap-3 pt-2">
-                    <span className="px-3 py-1 bg-gray-100 text-xs rounded-full">
+                    <span className="px-3 py-1 text-xs rounded-full" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       {character.category}
                     </span>
-                    <span className="text-xs text-gray-400 group-hover:text-black transition-colors">
+                    <span className="text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>
                       Read story →
                     </span>
                   </div>
@@ -236,24 +237,25 @@ const CharactersPage = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-24 text-center py-16 bg-gray-50 rounded-2xl"
+          className="mt-24 text-center py-16 rounded-2xl"
+          style={{ backgroundColor: 'var(--bg-secondary)' }}
         >
-          <p className="text-sm text-gray-400 mb-4">Discover Yourself</p>
+          <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>Discover Yourself</p>
           <h2 className="text-4xl md:text-5xl font-light mb-6">
             Which character are <span className="italic font-serif">you</span>?
           </h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="mb-8 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Take our personality quiz to find out which character from 
             Nish's World resonates with your soul.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/quiz/girl">
-              <button className="px-8 py-4 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
+              <button className="px-8 py-4 rounded-full transition-colors" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
                 Girl Quiz
               </button>
             </Link>
             <Link to="/quiz/boy">
-              <button className="px-8 py-4 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all">
+              <button className="px-8 py-4 border-2 rounded-full transition-all" style={{ borderColor: 'var(--text-primary)' }}>
                 Boy Quiz
               </button>
             </Link>
