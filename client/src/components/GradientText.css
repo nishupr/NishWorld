@@ -1,0 +1,126 @@
+.gradient-text {
+  position: relative;
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  font-weight: inherit;
+}
+
+/* Hero variant - Bold colorful gradient */
+.gradient-text.hero {
+  background-image: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #4facfe 75%,
+    #667eea 100%
+  );
+}
+
+/* Subtle variant - Minimal elegant gradient */
+.gradient-text.subtle {
+  background-image: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 50%,
+    var(--text-primary) 100%
+  );
+}
+
+/* Vibrant variant - Bright energetic gradient */
+.gradient-text.vibrant {
+  background-image: linear-gradient(
+    135deg,
+    #fa709a 0%,
+    #fee140 25%,
+    #30cfd0 50%,
+    #c471ed 75%,
+    #fa709a 100%
+  );
+}
+
+/* Animated gradient shift */
+.gradient-text.animated {
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hover effect - intensify animation */
+.gradient-text.animated:hover {
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .gradient-text.hero {
+  background-image: linear-gradient(
+    135deg,
+    #a8edea 0%,
+    #fed6e3 25%,
+    #d299c2 50%,
+    #fef9d7 75%,
+    #a8edea 100%
+  );
+}
+
+[data-theme='dark'] .gradient-text.vibrant {
+  background-image: linear-gradient(
+    135deg,
+    #ff9a9e 0%,
+    #fecfef 25%,
+    #ffdde1 50%,
+    #fee140 75%,
+    #ff9a9e 100%
+  );
+}
+
+/* Shimmer effect on load */
+.gradient-text.animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text.animated {
+    animation: none;
+  }
+  
+  .gradient-text.animated::before {
+    animation: none;
+  }
+}

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import FloatingParticles from '../components/FloatingParticles'
+import AnimatedGrid from '../components/AnimatedGrid'
 
 interface Character {
   id: string
@@ -124,8 +126,12 @@ const CharactersPage = () => {
     : characters.filter(c => c.gender === filter)
 
   return (
-    <div className="min-h-screen pt-24 pb-16" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+    <div className="min-h-screen pt-24 pb-16 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      {/* Animated Background */}
+      <FloatingParticles count={25} speed="slow" />
+      <AnimatedGrid variant="dots" spacing={50} />
+      
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         
         {/* Header */}
         <motion.div
@@ -154,7 +160,7 @@ const CharactersPage = () => {
         >
           <button
             onClick={() => setFilter('all')}
-            className="px-6 py-2 rounded-full text-sm transition-all"
+            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
             style={{
               backgroundColor: filter === 'all' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
               color: filter === 'all' ? 'var(--bg-primary)' : 'var(--text-secondary)'
@@ -164,7 +170,7 @@ const CharactersPage = () => {
           </button>
           <button
             onClick={() => setFilter('female')}
-            className="px-6 py-2 rounded-full text-sm transition-all"
+            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
             style={{
               backgroundColor: filter === 'female' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
               color: filter === 'female' ? 'var(--bg-primary)' : 'var(--text-secondary)'
@@ -174,7 +180,7 @@ const CharactersPage = () => {
           </button>
           <button
             onClick={() => setFilter('male')}
-            className="px-6 py-2 rounded-full text-sm transition-all"
+            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
             style={{
               backgroundColor: filter === 'male' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
               color: filter === 'male' ? 'var(--bg-primary)' : 'var(--text-secondary)'
@@ -192,40 +198,66 @@ const CharactersPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -12, transition: { duration: 0.3 } }}
               className="group"
             >
               <Link to={`/story/${character.id}`}>
-                {/* Image */}
-                <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                {/* Image with enhanced effects */}
+                <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden relative shadow-lg group-hover:shadow-2xl transition-shadow duration-500" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                   <img
                     src={character.image}
                     alt={character.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Floating emoji on hover */}
+                  <motion.div 
+                    className="absolute top-4 right-4 text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                  >
+                    {character.emoji}
+                  </motion.div>
+                  
+                  {/* Category badge overlay */}
+                  <div className="absolute bottom-4 left-4 px-4 py-2 rounded-full text-xs font-medium backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', color: 'white' }}>
+                    {character.category}
+                  </div>
                 </div>
 
-                {/* Info */}
-                <div className="space-y-2">
+                {/* Info with stagger animation */}
+                <motion.div 
+                  className="space-y-2"
+                  initial={{ opacity: 0.8 }}
+                  whileHover={{ opacity: 1 }}
+                >
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">{character.emoji}</span>
-                    <h3 className="text-xl font-medium group-hover:underline">
+                    <motion.span 
+                      className="text-2xl"
+                      whileHover={{ scale: 1.3, rotate: 15 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {character.emoji}
+                    </motion.span>
+                    <h3 className="text-xl font-medium group-hover:underline transition-all">
                       {character.name}
                     </h3>
                   </div>
                   <p className="text-sm italic" style={{ color: 'var(--text-secondary)' }}>{character.title}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
+                  <p className="text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all" style={{ color: 'var(--text-tertiary)' }}>
                     {character.description}
                   </p>
                   <div className="flex items-center gap-3 pt-2">
-                    <span className="px-3 py-1 text-xs rounded-full" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      {character.category}
-                    </span>
-                    <span className="text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>
+                    <motion.span 
+                      className="text-xs font-medium group-hover:scale-105 transition-transform"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
                       Read story →
-                    </span>
+                    </motion.span>
                   </div>
-                </div>
+                </motion.div>
               </Link>
             </motion.div>
           ))}
@@ -250,14 +282,24 @@ const CharactersPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/quiz/girl">
-              <button className="px-8 py-4 rounded-full transition-colors" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-full transition-colors" 
+                style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}
+              >
                 Girl Quiz
-              </button>
+              </motion.button>
             </Link>
             <Link to="/quiz/boy">
-              <button className="px-8 py-4 border-2 rounded-full transition-all" style={{ borderColor: 'var(--text-primary)' }}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 border-2 rounded-full transition-all" 
+                style={{ borderColor: 'var(--text-primary)' }}
+              >
                 Boy Quiz
-              </button>
+              </motion.button>
             </Link>
           </div>
         </motion.div>

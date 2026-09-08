@@ -1,11 +1,17 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import AnimatedGradient from '../components/AnimatedGradient'
+import FloatingParticles from '../components/FloatingParticles'
+import AnimatedGrid from '../components/AnimatedGrid'
+import GradientText from '../components/GradientText'
 
 const HomePage = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100])
   const [currentTime, setCurrentTime] = useState('')
 
   useEffect(() => {
@@ -25,12 +31,17 @@ const HomePage = () => {
   return (
     <div ref={containerRef} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       {/* Hero Section - Chapter I */}
-      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-32">
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
+        {/* Animated Background Layers */}
+        <AnimatedGradient variant="hero" />
+        <FloatingParticles count={40} speed="slow" />
+        
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="max-w-7xl mx-auto w-full"
+          className="max-w-7xl mx-auto w-full relative z-10"
+          style={{ scale, y }}
         >
           {/* Top Meta */}
           <motion.div 
@@ -59,7 +70,9 @@ const HomePage = () => {
           >
             A journey through
             <br />
-            <span className="italic font-serif">worlds of imagination</span>
+            <GradientText variant="hero" className="italic font-serif">
+              worlds of imagination
+            </GradientText>
           </motion.h1>
 
           {/* Subtitle */}
@@ -98,8 +111,11 @@ const HomePage = () => {
       </section>
 
       {/* Chapter I - Introduction */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-7xl mx-auto">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        {/* Animated Grid Background */}
+        <AnimatedGrid variant="dots" spacing={40} />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -138,8 +154,11 @@ const HomePage = () => {
       </section>
 
       {/* Chapter II - The Characters */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32">
-        <div className="max-w-7xl mx-auto">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
+        {/* Subtle Gradient Background */}
+        <AnimatedGradient variant="subtle" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -188,15 +207,18 @@ const HomePage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -8 }}
                     className="group cursor-pointer"
                   >
-                    <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                    <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden relative" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       <img 
                         src={character.image} 
                         alt={character.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                         loading="lazy"
                       />
+                      {/* Hover gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                     <p className="text-lg font-medium mb-1">{character.name}</p>
                     <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>{character.title}</p>
@@ -216,8 +238,11 @@ const HomePage = () => {
       </section>
 
       {/* Chapter III - What I Offer */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-7xl mx-auto">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        {/* Animated Lines Grid */}
+        <AnimatedGrid variant="lines" spacing={50} />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -276,8 +301,11 @@ const HomePage = () => {
       </section>
 
       {/* Chapter IV - Start Your Journey */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 flex items-center">
-        <div className="max-w-7xl mx-auto w-full">
+      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 flex items-center relative overflow-hidden">
+        {/* Particles for final section */}
+        <FloatingParticles count={30} speed="medium" />
+        
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -289,7 +317,9 @@ const HomePage = () => {
             <h2 className="text-6xl md:text-8xl font-light mb-12 leading-tight">
               Where stories
               <br />
-              <span className="italic font-serif">find their soul</span>
+              <GradientText variant="vibrant" className="italic font-serif">
+                find their soul
+              </GradientText>
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
