@@ -8,15 +8,13 @@
   font-weight: inherit;
 }
 
-/* Hero variant - Bold colorful gradient */
+/* Hero variant - Simple theme colors */
 .gradient-text.hero {
   background-image: linear-gradient(
     135deg,
-    #667eea 0%,
-    #764ba2 25%,
-    #f093fb 50%,
-    #4facfe 75%,
-    #667eea 100%
+    var(--text-primary) 0%,
+    var(--text-secondary) 50%,
+    var(--text-primary) 100%
   );
 }
 
@@ -30,15 +28,13 @@
   );
 }
 
-/* Vibrant variant - Bright energetic gradient */
+/* Vibrant variant - Same as hero for consistency */
 .gradient-text.vibrant {
   background-image: linear-gradient(
     135deg,
-    #fa709a 0%,
-    #fee140 25%,
-    #30cfd0 50%,
-    #c471ed 75%,
-    #fa709a 100%
+    var(--text-primary) 0%,
+    var(--text-secondary) 50%,
+    var(--text-primary) 100%
   );
 }
 
@@ -64,30 +60,26 @@
   animation: gradient-shift 3s ease infinite;
 }
 
-/* Dark mode adjustments */
+/* Dark mode adjustments - keep it monochrome */
 [data-theme='dark'] .gradient-text.hero {
   background-image: linear-gradient(
     135deg,
-    #a8edea 0%,
-    #fed6e3 25%,
-    #d299c2 50%,
-    #fef9d7 75%,
-    #a8edea 100%
+    #ffffff 0%,
+    #d1d5db 50%,
+    #ffffff 100%
   );
 }
 
 [data-theme='dark'] .gradient-text.vibrant {
   background-image: linear-gradient(
     135deg,
-    #ff9a9e 0%,
-    #fecfef 25%,
-    #ffdde1 50%,
-    #fee140 75%,
-    #ff9a9e 100%
+    #ffffff 0%,
+    #d1d5db 50%,
+    #ffffff 100%
   );
 }
 
-/* Shimmer effect on load */
+/* Shimmer effect on load - keep it cool! */
 .gradient-text.animated::before {
   content: '';
   position: absolute;

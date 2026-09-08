@@ -45,15 +45,15 @@ const AnimatedGradient = ({ variant = 'hero' }: AnimatedGradientProps) => {
       )
 
       if (theme === 'dark') {
-        // Dark mode: subtle purple/blue gradients
-        gradient.addColorStop(0, 'rgba(139, 92, 246, 0.03)')
-        gradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.05)')
-        gradient.addColorStop(1, 'rgba(236, 72, 153, 0.03)')
+        // Dark mode: pure black with minimal variation
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0.01)')
+        gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.005)')
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0.01)')
       } else {
-        // Light mode: soft pastel gradients
-        gradient.addColorStop(0, 'rgba(249, 168, 212, 0.15)')
-        gradient.addColorStop(0.5, 'rgba(191, 219, 254, 0.15)')
-        gradient.addColorStop(1, 'rgba(253, 230, 138, 0.1)')
+        // Light mode: pure black with minimal variation
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0.005)')
+        gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.008)')
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0.005)')
       }
 
       ctx.fillStyle = gradient

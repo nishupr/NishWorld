@@ -123,7 +123,9 @@ const HomePage = () => {
             transition={{ duration: 1 }}
           >
             <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter I</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">Quick intro</h2>
+            <h2 className="text-5xl md:text-7xl font-light mb-16">
+              <GradientText variant="subtle">Quick intro</GradientText>
+            </h2>
 
             <div className="grid md:grid-cols-2 gap-16">
               <div>
@@ -166,7 +168,9 @@ const HomePage = () => {
             transition={{ duration: 1 }}
           >
             <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter II</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">The Characters</h2>
+            <h2 className="text-5xl md:text-7xl font-light mb-16">
+              <GradientText variant="subtle">The Characters</GradientText>
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {[
@@ -250,7 +254,9 @@ const HomePage = () => {
             transition={{ duration: 1 }}
           >
             <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter III</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">What I offer?</h2>
+            <h2 className="text-5xl md:text-7xl font-light mb-16">
+              <GradientText variant="subtle">What I offer?</GradientText>
+            </h2>
 
             <p className="text-2xl md:text-3xl mb-16 max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
               Crafting emotional narratives with depth, authenticity, and connection.

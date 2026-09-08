@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import FloatingParticles from '../components/FloatingParticles'
 import AnimatedGrid from '../components/AnimatedGrid'
+import GradientText from '../components/GradientText'
 
 interface Character {
   id: string
@@ -142,7 +143,7 @@ const CharactersPage = () => {
         >
           <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>The Universe</p>
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
-            Meet the Characters
+            <GradientText variant="hero">Meet the Characters</GradientText>
           </h1>
           <p className="text-xl max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
             10 souls, each with their own journey. Rich backstories, 
