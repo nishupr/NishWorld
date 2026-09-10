@@ -84,14 +84,16 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -150%;
-  width: 150%;
+  left: -200%;
+  width: 200%;
   height: 100%;
   background: linear-gradient(
     90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 60%,
+    transparent 100%
   );
   animation: shimmer 3s ease-in-out infinite;
   pointer-events: none;
@@ -99,10 +101,10 @@
 
 @keyframes shimmer {
   0% {
-    left: -150%;
+    left: -200%;
   }
   100% {
-    left: 150%;
+    left: 200%;
   }
 }
 
