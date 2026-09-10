@@ -192,7 +192,7 @@ const HomePage = () => {
                 { 
                   name: 'Kai', 
                   title: 'Rooftops & Revelations',
-                  image: 'https://i.pinimg.com/564x/11/71/05/11710586104humg5hwn8tj3klyjym0q3xsg3aqcqavfxgfnjn6vzdexsginvqie52pfpiml81lkdwjj27mthgnou4h8cyayv6inhkmikcxhmsoy.jpg'
+                  image: 'https://i.pinimg.com/736x/46/a5/e0/46a5e0f623fec0bd3cffad1a12109e15.jpg'
                 },
                 { 
                   name: 'Luna', 
