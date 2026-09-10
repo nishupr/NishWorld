@@ -84,8 +84,8 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
+  left: -150%;
+  width: 150%;
   height: 100%;
   background: linear-gradient(
     90deg,
@@ -99,10 +99,10 @@
 
 @keyframes shimmer {
   0% {
-    left: -100%;
+    left: -150%;
   }
-  50%, 100% {
-    left: 100%;
+  100% {
+    left: 150%;
   }
 }
 
