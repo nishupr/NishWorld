@@ -1,364 +1,225 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
-import AnimatedGradient from '../components/AnimatedGradient'
-import FloatingParticles from '../components/FloatingParticles'
-import AnimatedGrid from '../components/AnimatedGrid'
-import GradientText from '../components/GradientText'
+import { Sparkles, BookOpen, Users } from 'lucide-react'
 
 const HomePage = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll()
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100])
-  const [currentTime, setCurrentTime] = useState('')
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      setCurrentTime(now.toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: false 
-      }))
-    }
-    updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
-    <div ref={containerRef} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      {/* Hero Section - Chapter I */}
-      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
-        {/* Animated Background Layers */}
-        <AnimatedGradient variant="hero" />
-        <FloatingParticles count={40} speed="slow" />
-        
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="max-w-7xl mx-auto w-full relative z-10"
-          style={{ scale, y }}
-        >
-          {/* Top Meta */}
-          <motion.div 
-            className="flex justify-between items-start mb-16 text-sm"
-            style={{ color: 'var(--text-tertiary)' }}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <div>
-              <p>Independent Storyteller</p>
-              <p className="mt-1">based in India</p>
-            </div>
-            <div className="text-right">
-              <p>New Delhi, India</p>
-              <p className="mt-1">(GMT+5:30) {currentTime}</p>
-            </div>
-          </motion.div>
-
-          {/* Main Headline */}
-          <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-light leading-none mb-8 tracking-tight"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            A journey through
-            <br />
-            <GradientText variant="hero" className="italic font-serif">
-              worlds of imagination
-            </GradientText>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="text-xl md:text-2xl mb-12 max-w-2xl"
-            style={{ color: 'var(--text-secondary)' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            Interactive storytelling platform — focused on emotional depth, 
-            character-driven narratives, and immersive experiences.
-          </motion.p>
-
-          {/* CTA Badge */}
-          <motion.div
-            className="inline-flex items-center gap-3 mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <span className="px-4 py-2 text-sm rounded-full" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
-              Open for exploration
-            </span>
-            <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>SCROLL</span>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          style={{ opacity }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-px h-16 bg-gradient-to-b from-gray-400 to-transparent" />
-        </motion.div>
-      </section>
-
-      {/* Chapter I - Introduction */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        {/* Animated Grid Background */}
-        <AnimatedGrid variant="dots" spacing={40} />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter I</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">
-              <GradientText variant="subtle">Quick intro</GradientText>
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-16">
+    <div className="min-h-screen" style={{ backgroundColor: '#FAF7F2' }}>
+      {/* Hero Section */}
+      <section className="relative px-6 md:px-12 lg:px-24 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+            {/* Left Column - Text */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
               <div>
-                <p className="text-xl md:text-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  Hi, I'm <span className="font-semibold">Nishu</span> — a storyteller 
-                  with a passion for creating immersive narratives, rich characters, 
-                  and emotional journeys that resonate.
+                <p className="text-sm uppercase tracking-wider mb-4" style={{ color: '#B8860B' }}>
+                  — A LITTLE WONDER, WAITING
                 </p>
+                <h1 className="text-5xl md:text-7xl font-serif mb-4" style={{ color: '#1A1A1A' }}>
+                  Stories that
+                </h1>
+                <h1 className="text-5xl md:text-7xl font-serif italic mb-6" style={{ color: '#8B5CF6' }}>
+                  stay with you.
+                </h1>
               </div>
-              <div className="space-y-8">
-                <div>
-                  <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>Philosophy</p>
-                  <p className="text-lg italic" style={{ color: 'var(--text-secondary)' }}>
-                    "Stories for the soul. Characters for the heart."
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>Beyond writing</p>
-                  <p style={{ color: 'var(--text-secondary)' }}>
-                    Anime aesthetics, emotional depth, character psychology, 
-                    and the magic of human connection.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Chapter II - The Characters */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
-        {/* Subtle Gradient Background */}
-        <AnimatedGradient variant="subtle" />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter II</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">
-              <GradientText variant="subtle">The Characters</GradientText>
-            </h2>
+              <p className="text-lg leading-relaxed" style={{ color: '#6B7280' }}>
+                Step into worlds made of moonlight, mischief, and maybe a little bit of you.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              {[
-                { 
-                  name: 'Lexi', 
-                  title: 'The Rockstar',
-                  image: 'https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg'
-                },
-                { 
-                  name: 'Alex', 
-                  title: 'The Melody of Dreams',
-                  image: 'https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg'
-                },
-                { 
-                  name: 'Bella', 
-                  title: 'The Secret of Evermist',
-                  image: 'https://w0.peakpx.com/wallpaper/644/678/HD-wallpaper-school-vibes-anime-girl-cute-sky-view-uniform.jpg'
-                },
-                { 
-                  name: 'Kai', 
-                  title: 'Rooftops & Revelations',
-                  image: 'https://i.pinimg.com/736x/46/a5/e0/46a5e0f623fec0bd3cffad1a12109e15.jpg'
-                },
-                { 
-                  name: 'Luna', 
-                  title: 'The Silent Flame',
-                  image: 'https://i.pinimg.com/236x/6d/4a/22/6d4a2216ef416deaaabf03def93dc550.jpg'
-                },
-                { 
-                  name: 'Vik', 
-                  title: 'Shadows of the Forgotten',
-                  image: 'https://i.pinimg.com/736x/44/d9/29/44d9296e901703500ad2d470008a6e24.jpg'
-                }
-              ].map((character, index) => (
-                <Link to="/characters" key={character.name}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -8 }}
-                    className="group cursor-pointer"
+              <div className="flex gap-4">
+                <Link to="/discover">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 rounded-md font-medium text-white flex items-center gap-2"
+                    style={{ backgroundColor: '#1A1A1A' }}
                   >
-                    <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden relative" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                      <img 
-                        src={character.image} 
-                        alt={character.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                        loading="lazy"
-                      />
-                      {/* Hover gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
-                    <p className="text-lg font-medium mb-1">{character.name}</p>
-                    <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>{character.title}</p>
-                    <p className="text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>View story →</p>
-                  </motion.div>
+                    Begin reading
+                    <span>→</span>
+                  </motion.button>
                 </Link>
-              ))}
-            </div>
+                <Link to="/discover">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 rounded-md font-medium border-2 flex items-center gap-2"
+                    style={{ borderColor: '#1A1A1A', color: '#1A1A1A' }}
+                  >
+                    Explore the library
+                    <span>→</span>
+                  </motion.button>
+                </Link>
+              </div>
 
-            <Link to="/characters">
-              <button className="px-8 py-4 rounded-full transition-colors" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
-                View All Characters
-              </button>
-            </Link>
-          </motion.div>
+              {/* Stats */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="flex items-center gap-4 pt-8"
+              >
+                <div className="flex -space-x-3">
+                  <div className="w-10 h-10 rounded-full border-2 border-white" style={{ backgroundColor: '#FFC0CB' }} />
+                  <div className="w-10 h-10 rounded-full border-2 border-white" style={{ backgroundColor: '#E6E6FA' }} />
+                  <div className="w-10 h-10 rounded-full border-2 border-white" style={{ backgroundColor: '#FFD700' }} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold" style={{ color: '#1A1A1A' }}>12,400 readers</p>
+                  <p className="text-xs" style={{ color: '#9CA3AF' }}>
+                    found their next world
+                  </p>
+                  <p className="text-xs" style={{ color: '#9CA3AF' }}>
+                    Join them as the stories begin
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Column - Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"
+                  alt="Magical purple forest"
+                  className="w-full h-[500px] md:h-[600px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8">
+                  <p className="text-white text-2xl font-serif italic">
+                    The world is wider than it looks.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Chapter III - What I Offer */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        {/* Animated Lines Grid */}
-        <AnimatedGrid variant="lines" spacing={50} />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter III</p>
-            <h2 className="text-5xl md:text-7xl font-light mb-16">
-              <GradientText variant="subtle">What I offer?</GradientText>
-            </h2>
-
-            <p className="text-2xl md:text-3xl mb-16 max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
-              Crafting emotional narratives with depth, authenticity, and connection.
-            </p>
-
-            <div className="grid gap-12">
-              {[
-                {
-                  num: '01',
-                  title: 'Character-Driven Stories',
-                  desc: 'Rich, complex characters with deep backstories and emotional arcs.'
-                },
-                {
-                  num: '02',
-                  title: 'Interactive Narratives',
-                  desc: 'Personality quizzes and immersive reading experiences.'
-                },
-                {
-                  num: '03',
-                  title: 'Emotional Depth',
-                  desc: 'Stories that explore love, loss, resilience, and redemption.'
-                },
-                {
-                  num: '04',
-                  title: 'Visual Storytelling',
-                  desc: 'Anime-inspired aesthetics with mood and atmosphere.'
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.num}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-8 pt-8"
-                  style={{ borderTop: '1px solid var(--border-color)' }}
+      {/* Features Section */}
+      <section className="px-6 md:px-12 lg:px-24 py-16" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Sparkles,
+                title: 'Choose your path',
+                desc: 'Every choice changes the story',
+                color: '#8B5CF6'
+              },
+              {
+                icon: BookOpen,
+                title: 'Made for wonder',
+                desc: 'Stories for every kind of reader',
+                color: '#F59E0B'
+              },
+              {
+                icon: Users,
+                title: 'Keep the feeling',
+                desc: 'Save worlds worth returning to',
+                color: '#EC4899'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex gap-4 p-6 rounded-xl"
+                style={{ backgroundColor: '#FAF7F2' }}
+              >
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${feature.color}15` }}
                 >
-                  <span className="text-sm w-12" style={{ color: 'var(--text-tertiary)' }}>{item.num}</span>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-medium mb-3">{item.title}</h3>
-                    <p style={{ color: 'var(--text-secondary)' }}>{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  <feature.icon size={24} style={{ color: feature.color }} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: '#1A1A1A' }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm" style={{ color: '#6B7280' }}>
+                    {feature.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Chapter IV - Start Your Journey */}
-      <section className="min-h-screen px-6 md:px-12 lg:px-24 py-32 flex items-center relative overflow-hidden">
-        {/* Particles for final section */}
-        <FloatingParticles count={30} speed="medium" />
-        
-        <div className="max-w-7xl mx-auto w-full relative z-10">
+      {/* CTA Section */}
+      <section className="px-6 md:px-12 lg:px-24 py-24">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-center"
+            className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
+            style={{ backgroundColor: '#E9D5FF' }}
           >
-            <p className="text-sm mb-8" style={{ color: 'var(--text-tertiary)' }}>Chapter IV</p>
-            <h2 className="text-6xl md:text-8xl font-light mb-12 leading-tight">
-              Where stories
-              <br />
-              <GradientText variant="vibrant" className="italic font-serif">
-                find their soul
-              </GradientText>
-            </h2>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link to="/characters">
-                <button className="px-10 py-5 rounded-full transition-all text-lg" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
-                  Explore Characters
-                </button>
-              </Link>
-              <Link to="/quiz/girl">
-                <button className="px-10 py-5 border-2 rounded-full transition-all text-lg" style={{ borderColor: 'var(--text-primary)' }}>
-                  Take a Quiz
-                </button>
+            <div className="relative z-10">
+              <p className="text-sm uppercase tracking-wider mb-4" style={{ color: '#7C3AED' }}>
+                YOUR BLANK PAGE
+              </p>
+              <h2 className="text-4xl md:text-6xl font-serif mb-4" style={{ color: '#1A1A1A' }}>
+                Bring a world
+              </h2>
+              <p className="text-4xl md:text-6xl font-serif italic mb-6" style={{ color: '#8B5CF6' }}>
+                to life.
+              </p>
+              <p className="text-lg mb-8" style={{ color: '#6B7280' }}>
+                Give us a spark. We'll help you find the story hiding inside it.
+              </p>
+              <Link to="/create">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-4 rounded-md font-medium text-white flex items-center gap-2 mx-auto"
+                  style={{ backgroundColor: '#1A1A1A' }}
+                >
+                  Open story studio
+                  <Sparkles size={18} />
+                </motion.button>
               </Link>
             </div>
+            {/* Decorative sparkles */}
+            <div className="absolute top-10 left-10 text-4xl opacity-20">✨</div>
+            <div className="absolute bottom-10 right-10 text-4xl opacity-20">✨</div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-12 lg:px-24 py-16" style={{ borderTop: '1px solid var(--border-color)' }}>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <footer className="px-6 md:px-12 lg:px-24 py-12" style={{ borderTop: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>AUTHOR & CREATOR</p>
-            <p className="text-2xl font-medium">Nishu Pundir</p>
-            <p className="mt-1" style={{ color: 'var(--text-secondary)' }}>A mind always wandering into realms unknown ♥</p>
+            <p className="text-lg font-serif font-semibold" style={{ color: '#1A1A1A' }}>
+              Nish's World
+            </p>
+            <p className="text-sm" style={{ color: '#9CA3AF' }}>
+              Where stories stay with you
+            </p>
           </div>
           <div className="flex gap-6">
             <a
               href="https://www.linkedin.com/in/nishu-pundir-33a188336"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm hover:underline"
+              style={{ color: '#6B7280' }}
             >
               LinkedIn
             </a>
@@ -366,15 +227,15 @@ const HomePage = () => {
               href="https://www.instagram.com/hey.niish"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm hover:underline"
+              style={{ color: '#6B7280' }}
             >
               Instagram
             </a>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-12 text-center text-sm" style={{ color: 'var(--text-tertiary)' }}>
-          <p>© 2026 — nish's world — edition</p>
+        <div className="max-w-7xl mx-auto mt-8 text-center text-xs" style={{ color: '#9CA3AF' }}>
+          <p>© 2026 Nish's World. Made with imagination.</p>
         </div>
       </footer>
     </div>

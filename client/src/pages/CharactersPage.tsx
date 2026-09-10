@@ -1,311 +1,336 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import FloatingParticles from '../components/FloatingParticles'
-import AnimatedGrid from '../components/AnimatedGrid'
-import GradientText from '../components/GradientText'
+import { BookOpen, Feather } from 'lucide-react'
 
-interface Character {
+interface Author {
   id: string
   name: string
-  title: string
+  displayName: string
   emoji: string
-  gender: 'male' | 'female'
-  category: string
   image: string
-  description: string
+  bio: string
+  stories: {
+    id: string
+    title: string
+    category: string
+  }[]
+  traits: string[]
+  genre: string
 }
 
-const characters: Character[] = [
+const authors: Author[] = [
   {
     id: 'lexi',
     name: 'Lexi',
-    title: 'The Rockstar with a Heart',
+    displayName: 'Lexi Hart',
     emoji: '🎤',
-    gender: 'female',
-    category: 'Rockstar',
     image: 'https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg',
-    description: 'Fierce, fearless, and undeniably talented. A world icon who found love beyond fame.'
+    bio: 'A storyteller of fame, music, and the hearts that beat behind the spotlight.',
+    stories: [
+      { id: 'lexi', title: 'The Lantern Keeper', category: 'Romance' }
+    ],
+    traits: ['Fearless', 'Passionate', 'Authentic'],
+    genre: 'Contemporary Romance'
   },
   {
     id: 'alex',
     name: 'Alex',
-    title: 'The Melody of Dreams',
+    displayName: 'Alex Rivers',
     emoji: '🎸',
-    gender: 'male',
-    category: 'Musician',
     image: 'https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg',
-    description: 'Born from struggle, he rose through music and love to become a legend.'
+    bio: 'Crafting tales of dreams, struggles, and the melodies that connect souls.',
+    stories: [
+      { id: 'alex', title: 'The Melody of Dreams', category: 'Inspirational' }
+    ],
+    traits: ['Determined', 'Artistic', 'Humble'],
+    genre: 'Musical Drama'
   },
   {
     id: 'bella',
     name: 'Bella',
-    title: 'The Secret of Evermist Academy',
+    displayName: 'Bella Moonwright',
     emoji: '🌸',
-    gender: 'female',
-    category: 'Student',
     image: 'https://w0.peakpx.com/wallpaper/644/678/HD-wallpaper-school-vibes-anime-girl-cute-sky-view-uniform.jpg',
-    description: 'Curious and kind, she awakened the magic hidden within Evermist Academy.'
+    bio: 'Weaver of magical worlds where kindness is the greatest power.',
+    stories: [
+      { id: 'bella', title: 'The Secret of Evermist', category: 'Fantasy' }
+    ],
+    traits: ['Curious', 'Kind', 'Magical'],
+    genre: 'Whimsical Fantasy'
   },
   {
     id: 'kai',
     name: 'Kai',
-    title: 'Rooftops & Revelations',
+    displayName: 'Kai Storm',
     emoji: '⚡',
-    gender: 'male',
-    category: 'Guardian',
     image: 'https://i.pinimg.com/736x/46/a5/e0/46a5e0f623fec0bd3cffad1a12109e15.jpg',
-    description: 'A spark in every room, he became a guardian protecting the balance between worlds.'
+    bio: 'Chronicles of adrenaline, rooftops, and the balance between chaos and duty.',
+    stories: [
+      { id: 'kai', title: 'Rooftops & Revelations', category: 'Action' }
+    ],
+    traits: ['Adventurous', 'Loyal', 'Fearless'],
+    genre: 'Urban Fantasy'
   },
   {
     id: 'luna',
     name: 'Luna',
-    title: 'The Silent Flame',
+    displayName: 'Luna Shadowflame',
     emoji: '🌙',
-    gender: 'female',
-    category: 'Flame Bearer',
     image: 'https://i.pinimg.com/236x/6d/4a/22/6d4a2216ef416deaaabf03def93dc550.jpg',
-    description: 'Bearer of the Eclipsa Flame, she found her match in the most unexpected enemy.'
+    bio: 'Tales of fire and ice, where enemies become lovers and destiny bends.',
+    stories: [
+      { id: 'luna', title: 'The Silent Flame', category: 'Fantasy Romance' }
+    ],
+    traits: ['Mysterious', 'Powerful', 'Resilient'],
+    genre: 'Epic Fantasy'
   },
   {
     id: 'vik',
     name: 'Vik',
-    title: 'Shadows of the Forgotten',
+    displayName: 'Vik Ashborne',
     emoji: '🛡️',
-    gender: 'male',
-    category: 'Guardian',
     image: 'https://i.pinimg.com/736x/44/d9/29/44d9296e901703500ad2d470008a6e24.jpg',
-    description: 'The Unbroken. Silent, powerful, and eternally protective of those in need.'
+    bio: 'Stories of shadows, redemption, and the unbroken spirit of guardians.',
+    stories: [
+      { id: 'vik', title: 'Shadows of the Forgotten', category: 'Thriller' }
+    ],
+    traits: ['Silent', 'Protective', 'Honorable'],
+    genre: 'Dark Fiction'
   },
   {
     id: 'blaze',
     name: 'Blaze',
-    title: 'Burn the Rulebook',
+    displayName: 'Blaze Nova',
     emoji: '🔥',
-    gender: 'female',
-    category: 'Rebel',
     image: 'https://i.pinimg.com/736x/bb/2f/52/bb2f52ab166107088ef7153de6c5588a.jpg',
-    description: 'A wildfire of rebellion who burned down her past and built a revolution.'
+    bio: 'Rebellion, fire, and the courage to burn down empires for freedom.',
+    stories: [
+      { id: 'blaze', title: 'Burn the Rulebook', category: 'Action' }
+    ],
+    traits: ['Rebellious', 'Fearless', 'Revolutionary'],
+    genre: 'Dystopian Action'
   },
   {
     id: 'zade',
     name: 'Zade',
-    title: 'The Game of Shadows',
+    displayName: 'Zade Vex',
     emoji: '♟️',
-    gender: 'male',
-    category: 'Strategist',
     image: 'https://cdn.talkie-ai.com/talkie/prod/img/abb520af-b4a5-41f6-8ca1-b750c80d1568.jpeg',
-    description: 'A genius strategist who rewrote the rules and liberated a city.'
+    bio: 'Master of intrigue, strategy, and games where loyalty gets you killed.',
+    stories: [
+      { id: 'zade', title: 'The Game of Shadows', category: 'Thriller' }
+    ],
+    traits: ['Strategic', 'Charming', 'Cunning'],
+    genre: 'Psychological Thriller'
   },
   {
     id: 'sky',
     name: 'Sky',
-    title: 'The Wildfire and the Wind',
+    displayName: 'Sky Wilder',
     emoji: '🌩️',
-    gender: 'female',
-    category: 'Wanderer',
     image: 'https://i.pinimg.com/564x/1d/7d/50/1d7d50bdace5fffda5ad58a390b8d3e4.jpg',
-    description: 'A storm in motion who found stillness in unexpected love.'
-  },
-  {
-    id: 'rex',
-    name: 'Rex',
-    title: 'The Pulse Beneath the Chaos',
-    emoji: '🏍️',
-    gender: 'male',
-    category: 'Leader',
-    image: 'https://i.pinimg.com/736x/f9/0f/e3/f90fe34c5a50fec1bcd0b4cfa354cdef.jpg',
-    description: 'Living life at full throttle, he races to protect lost souls from the machine.'
+    bio: 'Where wildfire meets wind, storms collide, and love finds its way.',
+    stories: [
+      { id: 'sky', title: 'Wildfire & Wind', category: 'Romance' }
+    ],
+    traits: ['Wild', 'Free', 'Passionate'],
+    genre: 'Contemporary Romance'
   }
 ]
 
 const CharactersPage = () => {
-  const [filter, setFilter] = useState<'all' | 'male' | 'female'>('all')
-
-  const filteredCharacters = filter === 'all' 
-    ? characters 
-    : characters.filter(c => c.gender === filter)
+  const [hoveredAuthor, setHoveredAuthor] = useState<string | null>(null)
 
   return (
-    <div className="min-h-screen pt-24 pb-16 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      {/* Animated Background */}
-      <FloatingParticles count={25} speed="slow" />
-      <AnimatedGrid variant="dots" spacing={50} />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>The Universe</p>
-          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
-            <GradientText variant="hero">Meet the Characters</GradientText>
-          </h1>
-          <p className="text-xl max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
-            10 souls, each with their own journey. Rich backstories, 
-            emotional depth, and unforgettable narratives.
-          </p>
-        </motion.div>
+    <div className="min-h-screen" style={{ backgroundColor: '#FAF7F2' }}>
+      {/* Header Section */}
+      <section className="px-6 md:px-12 lg:px-24 pt-32 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-sm uppercase tracking-wider mb-4" style={{ color: '#B8860B' }}>
+              THE AUTHORS
+            </p>
+            <h1 className="text-5xl md:text-7xl font-serif mb-4" style={{ color: '#1A1A1A' }}>
+              Meet the
+            </h1>
+            <h1 className="text-5xl md:text-7xl font-serif italic mb-6" style={{ color: '#8B5CF6' }}>
+              storytellers.
+            </h1>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
+              Every character is an author. Every story is a journey. 
+              Dive into the worlds they've crafted with heart and soul.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="flex gap-4 mb-12 pb-6"
-          style={{ borderBottom: '1px solid var(--border-color)' }}
-        >
-          <button
-            onClick={() => setFilter('all')}
-            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
-            style={{
-              backgroundColor: filter === 'all' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
-              color: filter === 'all' ? 'var(--bg-primary)' : 'var(--text-secondary)'
-            }}
-          >
-            All Characters ({characters.length})
-          </button>
-          <button
-            onClick={() => setFilter('female')}
-            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
-            style={{
-              backgroundColor: filter === 'female' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
-              color: filter === 'female' ? 'var(--bg-primary)' : 'var(--text-secondary)'
-            }}
-          >
-            Female (5)
-          </button>
-          <button
-            onClick={() => setFilter('male')}
-            className="px-6 py-2 rounded-full text-sm transition-all transform hover:scale-105 active:scale-95"
-            style={{
-              backgroundColor: filter === 'male' ? 'var(--text-primary)' : 'var(--bg-tertiary)',
-              color: filter === 'male' ? 'var(--bg-primary)' : 'var(--text-secondary)'
-            }}
-          >
-            Male (5)
-          </button>
-        </motion.div>
+      {/* Authors Grid */}
+      <section className="px-6 md:px-12 lg:px-24 pb-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {authors.map((author, index) => (
+              <motion.div
+                key={author.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onHoverStart={() => setHoveredAuthor(author.id)}
+                onHoverEnd={() => setHoveredAuthor(null)}
+                className="group"
+              >
+                <div
+                  className="rounded-2xl overflow-hidden shadow-lg transition-all duration-500"
+                  style={{ 
+                    backgroundColor: '#FFFFFF',
+                    transform: hoveredAuthor === author.id ? 'translateY(-8px)' : 'translateY(0)'
+                  }}
+                >
+                  {/* Author Image */}
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      src={author.image}
+                      alt={author.displayName}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    
+                    {/* Overlay Info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-3xl">{author.emoji}</span>
+                        <div>
+                          <p className="text-white font-serif text-xl font-semibold">
+                            {author.displayName}
+                          </p>
+                          <p className="text-white/80 text-xs uppercase tracking-wide">
+                            {author.genre}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-        {/* Character Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCharacters.map((character, index) => (
-            <motion.div
-              key={character.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -12, transition: { duration: 0.3 } }}
-              className="group"
-            >
-              <Link to={`/story/${character.id}`}>
-                {/* Image with enhanced effects */}
-                <div className="aspect-[3/4] rounded-lg mb-4 overflow-hidden relative shadow-lg group-hover:shadow-2xl transition-shadow duration-500" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                  <img
-                    src={character.image}
-                    alt={character.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Floating emoji on hover */}
-                  <motion.div 
-                    className="absolute top-4 right-4 text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    {character.emoji}
-                  </motion.div>
-                  
-                  {/* Category badge overlay */}
-                  <div className="absolute bottom-4 left-4 px-4 py-2 rounded-full text-xs font-medium backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', color: 'white' }}>
-                    {character.category}
+                  {/* Author Info */}
+                  <div className="p-6">
+                    {/* Bio */}
+                    <p className="text-sm mb-4 leading-relaxed" style={{ color: '#6B7280' }}>
+                      {author.bio}
+                    </p>
+
+                    {/* Traits */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {author.traits.map((trait) => (
+                        <span
+                          key={trait}
+                          className="px-3 py-1 rounded-full text-xs font-medium"
+                          style={{ 
+                            backgroundColor: '#F3E8FF',
+                            color: '#7C3AED'
+                          }}
+                        >
+                          {trait}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Stories */}
+                    <div className="pt-4" style={{ borderTop: '1px solid #E5E7EB' }}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <BookOpen size={16} style={{ color: '#9CA3AF' }} />
+                        <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: '#9CA3AF' }}>
+                          Stories
+                        </p>
+                      </div>
+                      {author.stories.map((story) => (
+                        <Link 
+                          key={story.id} 
+                          to={`/story/${story.id}`}
+                          className="block mb-2 group/story"
+                        >
+                          <div className="flex items-center justify-between p-3 rounded-lg transition-all hover:scale-105" style={{ backgroundColor: '#FAF7F2' }}>
+                            <div>
+                              <p className="font-serif font-medium mb-1" style={{ color: '#1A1A1A' }}>
+                                {story.title}
+                              </p>
+                              <p className="text-xs" style={{ color: '#9CA3AF' }}>
+                                {story.category}
+                              </p>
+                            </div>
+                            <span className="text-lg group-hover/story:translate-x-1 transition-transform">
+                              →
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* View Profile Button */}
+                    <Link to={`/story/${author.id}`}>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full mt-4 px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition-all"
+                        style={{ 
+                          backgroundColor: '#1A1A1A',
+                          color: '#FFFFFF'
+                        }}
+                      >
+                        <Feather size={16} />
+                        <span>Read Their Story</span>
+                      </motion.button>
+                    </Link>
                   </div>
                 </div>
-
-                {/* Info with stagger animation */}
-                <motion.div 
-                  className="space-y-2"
-                  initial={{ opacity: 0.8 }}
-                  whileHover={{ opacity: 1 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <motion.span 
-                      className="text-2xl"
-                      whileHover={{ scale: 1.3, rotate: 15 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      {character.emoji}
-                    </motion.span>
-                    <h3 className="text-xl font-medium group-hover:underline transition-all">
-                      {character.name}
-                    </h3>
-                  </div>
-                  <p className="text-sm italic" style={{ color: 'var(--text-secondary)' }}>{character.title}</p>
-                  <p className="text-sm leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all" style={{ color: 'var(--text-tertiary)' }}>
-                    {character.description}
-                  </p>
-                  <div className="flex items-center gap-3 pt-2">
-                    <motion.span 
-                      className="text-xs font-medium group-hover:scale-105 transition-transform"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      Read story →
-                    </motion.span>
-                  </div>
-                </motion.div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Quiz CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-24 text-center py-16 rounded-2xl"
-          style={{ backgroundColor: 'var(--bg-secondary)' }}
-        >
-          <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>Discover Yourself</p>
-          <h2 className="text-4xl md:text-5xl font-light mb-6">
-            Which character are <span className="italic font-serif">you</span>?
-          </h2>
-          <p className="mb-8 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            Take our personality quiz to find out which character from 
-            Nish's World resonates with your soul.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/quiz/girl">
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full transition-colors" 
-                style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}
-              >
-                Girl Quiz
-              </motion.button>
-            </Link>
-            <Link to="/quiz/boy">
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border-2 rounded-full transition-all" 
-                style={{ borderColor: 'var(--text-primary)' }}
-              >
-                Boy Quiz
-              </motion.button>
-            </Link>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-      </div>
+      {/* CTA Section */}
+      <section className="px-6 md:px-12 lg:px-24 pb-24">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
+            style={{ backgroundColor: '#FFF7ED' }}
+          >
+            <div className="relative z-10">
+              <p className="text-sm uppercase tracking-wider mb-4" style={{ color: '#EA580C' }}>
+                BECOME AN AUTHOR
+              </p>
+              <h2 className="text-4xl md:text-5xl font-serif mb-6" style={{ color: '#1A1A1A' }}>
+                Your story <span className="italic" style={{ color: '#F59E0B' }}>awaits.</span>
+              </h2>
+              <p className="text-lg mb-8" style={{ color: '#6B7280' }}>
+                Every author started with a single word. What will yours be?
+              </p>
+              <Link to="/create">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-4 rounded-md font-medium text-white inline-flex items-center gap-2"
+                  style={{ backgroundColor: '#1A1A1A' }}
+                >
+                  <Feather size={18} />
+                  Start writing
+                </motion.button>
+              </Link>
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -left-10 text-8xl opacity-10">📖</div>
+            <div className="absolute -bottom-10 -right-10 text-8xl opacity-10">✨</div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }

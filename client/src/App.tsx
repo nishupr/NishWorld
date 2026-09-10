@@ -6,6 +6,8 @@ import { ThemeProvider } from './contexts/ThemeContext'
 
 // Pages
 import HomePage from './pages/HomePage'
+import DiscoverPage from './pages/DiscoverPage'
+import CreateStoryPage from './pages/CreateStoryPage'
 import CharactersPage from './pages/CharactersPage'
 import StoryPage from './pages/StoryPage'
 import QuizPage from './pages/QuizPage'
@@ -51,6 +53,8 @@ function App() {
             <main id="main-content">
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/discover" element={<DiscoverPage />} />
+                <Route path="/create" element={<CreateStoryPage />} />
                 <Route path="/characters" element={<CharactersPage />} />
                 <Route path="/story/:id" element={<StoryPage />} />
                 <Route path="/quiz/:type" element={<QuizPage />} />

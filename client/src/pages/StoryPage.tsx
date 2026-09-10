@@ -1,544 +1,438 @@
-import { motion } from 'framer-motion'
-import { useParams, Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { X, BookOpen, Heart, Share2, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface StoryData {
   id: string
   name: string
   title: string
-  emoji: string
+  subtitle: string
+  author: string
   image: string
-  story: string
+  chapters: {
+    number: number
+    title: string
+    content: string[]
+  }[]
+  readTime: string
   category: string
-  traits: string[]
 }
 
 const stories: Record<string, StoryData> = {
   lexi: {
     id: 'lexi',
     name: 'Lexi',
-    title: '🎤 Lexi: The Rockstar with a Heart',
-    emoji: '🎤',
+    title: 'The Lantern Keeper',
+    subtitle: 'When the last star goes missing',
+    author: 'LuminaTales',
     image: 'https://imgcdn.stablediffusionweb.com/2024/12/22/fc19cb5e-9bba-48e9-9c00-23cf727129d0.jpg',
-    category: 'Rockstar',
-    traits: ['Fearless', 'Talented', 'Passionate', 'Loyal'],
-    story: `Lexi stood under the blinding spotlight, microphone in hand, a sea of fans screaming her name. She was the world's icon — fierce, fearless, and undeniably talented. Her voice echoed in every arena she stepped into, and her face graced every magazine cover. But fame, for all its glamour, came with loneliness.
-
-Behind the scenes, Lexi craved something real — something not built on flashing cameras and PR deals. One evening, while taking a break from her chaotic tour life, Lexi wandered into a small café tucked away in a quiet corner of the city. 
-
-There, under dim fairy lights and a stage that barely fit two people, a young man was singing — raw, passionate, and completely immersed in his music. His name was Noah. He wasn't famous. He didn't have a record label or a viral video. But there was something magical in the way he sang, as if every word was drawn from the deepest parts of his soul.
-
-Lexi sat in silence, mesmerized. That night, she stayed after the show and introduced herself — not as Lexi the celebrity, but just Lexi, a lover of music. Their connection was instant. Noah didn't treat her like a superstar. He spoke to her like she was human — flawed, curious, and full of dreams.
-
-Over time, their friendship blossomed into a quiet romance. Lexi started writing songs with him in secret, meeting late at night in studios no one knew about. Their worlds were so different, yet their hearts beat to the same rhythm.
-
-But the world didn't stay quiet for long. When news of their relationship broke, the internet erupted. Lexi was trolled relentlessly. "Why him?" they said. "A nobody with no fame?" Headlines spun cruel stories, fans turned against her, and producers warned her she was risking everything.
-
-But Lexi didn't flinch. She stood by Noah — through the noise, the hate, and the storms. She helped him believe in his voice, gave him the platform he needed, but never overshadowed his path. And Noah? He rose. Not because of her fame, but because of his raw, undeniable talent.
-
-A few years later, Noah won Artist of the Year, standing on the same stage where Lexi had once stood. That night, he proposed to her — right there, in front of millions, with tears in his eyes and a heart full of gratitude.
-
-They got married in a private garden under the stars, far away from flashing lights and red carpets. Years passed, and they had two beautiful kids who grew up surrounded by music, laughter, and the most genuine love.
-
-Lexi and Noah became legends — not just as artists, but as soulmates who defied the odds, silenced the critics, and proved that love rooted in trust and respect could weather any storm. Their story was turned into a movie, a bestseller, and a timeless tale told to every generation that dreams of both fame and love.
-
-They weren't just stars. They were a constellation — lighting up the world, together.`
+    category: 'FAIRYTALE',
+    readTime: '8 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Last Light',
+        content: [
+          'Lexi stood under the blinding spotlight, microphone in hand, a sea of fans screaming her name. She was the world\'s icon — fierce, fearless, and undeniably talented. Her voice echoed in every arena she stepped into, and her face graced every magazine cover.',
+          'But fame, for all its glamour, came with loneliness. Behind the scenes, Lexi craved something real — something not built on flashing cameras and PR deals.',
+          'One evening, while taking a break from her chaotic tour life, Lexi wandered into a small café tucked away in a quiet corner of the city.'
+        ]
+      },
+      {
+        number: 2,
+        title: 'A Voice in the Shadows',
+        content: [
+          'There, under dim fairy lights and a stage that barely fit two people, a young man was singing — raw, passionate, and completely immersed in his music. His name was Noah.',
+          'He wasn\'t famous. He didn\'t have a record label or a viral video. But there was something magical in the way he sang, as if every word was drawn from the deepest parts of his soul.',
+          'Lexi sat in silence, mesmerized. That night, she stayed after the show and introduced herself — not as Lexi the celebrity, but just Lexi, a lover of music.'
+        ]
+      },
+      {
+        number: 3,
+        title: 'Hearts in Harmony',
+        content: [
+          'Their connection was instant. Noah didn\'t treat her like a superstar. He spoke to her like she was human — flawed, curious, and full of dreams.',
+          'Over time, their friendship blossomed into a quiet romance. Lexi started writing songs with him in secret, meeting late at night in studios no one knew about.',
+          'Their worlds were so different, yet their hearts beat to the same rhythm.'
+        ]
+      },
+      {
+        number: 4,
+        title: 'The Storm',
+        content: [
+          'But the world didn\'t stay quiet for long. When news of their relationship broke, the internet erupted. Lexi was trolled relentlessly. "Why him?" they said. "A nobody with no fame?"',
+          'Headlines spun cruel stories, fans turned against her, and producers warned her she was risking everything. But Lexi didn\'t flinch.',
+          'She stood by Noah — through the noise, the hate, and the storms. She helped him believe in his voice, gave him the platform he needed, but never overshadowed his path.'
+        ]
+      },
+      {
+        number: 5,
+        title: 'A Constellation',
+        content: [
+          'A few years later, Noah won Artist of the Year, standing on the same stage where Lexi had once stood. That night, he proposed to her — right there, in front of millions, with tears in his eyes and a heart full of gratitude.',
+          'They got married in a private garden under the stars, far away from flashing lights and red carpets. Years passed, and they had two beautiful kids who grew up surrounded by music, laughter, and the most genuine love.',
+          'Lexi and Noah became legends — not just as artists, but as soulmates who defied the odds, silenced the critics, and proved that love rooted in trust and respect could weather any storm.',
+          'They weren\'t just stars. They were a constellation — lighting up the world, together.'
+        ]
+      }
+    ]
   },
   alex: {
     id: 'alex',
     name: 'Alex',
-    title: '🎸 Alex: The Melody of Dreams',
-    emoji: '🎸',
+    title: 'The Melody of Dreams',
+    subtitle: 'From rooftops to stadiums',
+    author: 'Echo Studios',
     image: 'https://img.freepik.com/free-photo/anime-character-playing-guitar_23-2151103495.jpg',
-    category: 'Musician',
-    traits: ['Determined', 'Artistic', 'Humble', 'Romantic'],
-    story: `Alex wasn't born into fame. He didn't have the luxury of polished studios or high-profile mentors. His world was small — a second-hand guitar, a cramped apartment, and a heart bursting with music.
-
-From the moment he held that worn six-string, he knew — music wasn't just a passion; it was his soul's language. Every morning, he'd wake up before the sun, working part-time jobs to afford basic equipment. Every night, he'd return home and lose himself in melodies, writing lyrics under dim lights, dreaming of stages he'd never seen.
-
-The world didn't know him — not yet — but he believed, deep inside, that one day it would.
-
-Then came her. He met her at a cozy underground open mic night. She wasn't there to be impressed. She wasn't a label scout. She was just... present — really present. As he sang a song about chasing dreams through storms, she listened with the kind of stillness that made everything else disappear.
-
-Her name was Aria, and from that moment on, their lives became intertwined like harmonies in a ballad.
-
-She believed in him when no one else did. She sat with him through rejections, helped him send out demos, designed his first website, and even sold her own art to fund his first EP. But it wasn't just support — it was love. A kind of love that felt like home in a world that constantly felt too loud, too harsh, too fast.
-
-Still, the climb was brutal. There were days when labels laughed at him. Nights when he couldn't afford both food and guitar strings. Friends walked away. Doubt crept in. But she remained — through all of it. She'd hold his hand when he broke, whisper, 'The world hasn't caught up to you yet, but it will. I know it will.'
-
-Years passed. Slowly, the world started to listen. A viral street performance. A shared clip by a famous influencer. Suddenly, his inbox was flooding. Offers, deals, bookings. The boy from the rooftops was now playing sold-out venues, his name echoing in places he once only imagined.
-
-But he never forgot. At every award speech, he spoke of her. In every song, her essence lived. He didn't just rise; they rose.
-
-As his fame grew, so did the spotlight on them — their love, their story. And while there were moments when the fame threatened to shake them, their bond only grew stronger.
-
-Eventually, he proposed on the same stage where they first met. With tearful eyes, she said yes. They got married in a field under fairy lights, surrounded by close friends, fans, and a quiet symphony of all the songs they had written together over the years.
-
-They had children — little dreamers who danced around their home filled with instruments, laughter, and endless love.
-
-Alex didn't just become a star. He became a legend, not because of the fame, but because of the journey. A journey of resilience, unwavering belief, and a love so pure it inspired millions.
-
-They weren't just a couple. They became a symbol — that behind every great artist is a great love story. And Alex's music? It was never about being the loudest or the fastest. It was always about truth. And his truth — was her.`
+    category: 'ROMANCE',
+    readTime: '10 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Beginning',
+        content: [
+          'Alex wasn\'t born into fame. He didn\'t have the luxury of polished studios or high-profile mentors. His world was small — a second-hand guitar, a cramped apartment, and a heart bursting with music.',
+          'From the moment he held that worn six-string, he knew — music wasn\'t just a passion; it was his soul\'s language.'
+        ]
+      }
+    ]
   },
   bella: {
     id: 'bella',
     name: 'Bella',
-    title: '🌸 Bella: The Secret of Evermist Academy',
-    emoji: '🌸',
+    title: 'The Secret of Evermist',
+    subtitle: 'Magic hidden in plain sight',
+    author: 'Mystic Chronicles',
     image: 'https://w0.peakpx.com/wallpaper/644/678/HD-wallpaper-school-vibes-anime-girl-cute-sky-view-uniform.jpg',
-    category: 'Student',
-    traits: ['Curious', 'Kind', 'Magical', 'Empathetic'],
-    story: `In a quaint town nestled between rolling hills and dense forests stood Evermist Academy — an age-old school known for its ivy-covered walls, whispering hallways, and a curious reputation of being just a little bit different.
-
-Most students walked its halls thinking it was just a fancy, mysterious building. But Bella, with her ever-curious heart and sunshine-like spirit, sensed something more.
-
-Bella was known for her joyful energy — she'd skip through the corridors humming soft tunes, hand out handmade notes with doodled smiles, and notice things most others didn't: the way the roses in the garden turned slightly toward her as she passed, or how certain books in the library rearranged themselves when no one was watching.
-
-Unlike most students chasing grades or cliques, Bella cherished moments — the laughter over shared lunches, the satisfaction of finishing a good story, or the comfort of sitting under the ancient oak tree that stood at the edge of campus.
-
-But deep inside, she had always felt like she was meant for something… more.
-
-One rainy afternoon, as Bella was helping clean the dusty attic of the old library, she stumbled upon a hidden compartment in the wall. Inside, a glowing feather floated — warm to the touch, pulsing like a heartbeat.
-
-From that moment, whispers began to follow her. Whispers from the walls, the wind, even the pages of old forgotten books. She wasn't imagining it — Evermist Academy was alive.
-
-With the help of her best friends — a shy painter named Elio, and an overly logical science whiz named Tara — Bella began to uncover the school's secret. Hundreds of years ago, the founders of Evermist had enchanted the school to protect a magical source of energy — one powered not by wands or spells, but by emotions. Kindness, empathy, and joy were the strongest forms of magic — and over time, people had forgotten. But Evermist hadn't. It had simply been waiting for someone like Bella.
-
-As mysterious happenings increased — objects floating, strange shadows, and a growing sense of unrest — it became clear that the school's enchantments were weakening. The darkness of anger, loneliness, and bitterness had started to creep in.
-
-Bella realized that the only way to restore balance was to awaken the magic within everyone — to remind them of the power of compassion.
-
-She began small: secret notes left in lockers, anonymous gifts to lonely students, laughter-filled events, and midnight story circles under the stars. Slowly, the school began to shift. The halls glowed warmer. The paintings smiled. The oak tree danced.
-
-In the final trial, Bella and her friends faced a forgotten creature that fed on sorrow and isolation — but instead of fighting it with power, Bella embraced it. She spoke to it, shared her own fears, and forgave it. In that moment of absolute empathy, the school's magic returned in a golden wave that swept over Evermist.
-
-Bella was hailed not as a warrior or queen, but as the Heart of Evermist. She went on to become a magical storyteller, known across the lands, inspiring generations to believe in the smallest acts of kindness.
-
-And every spring, when the cherry blossoms bloomed across Evermist's lawns, whispers of her laughter could still be heard — a reminder that the truest magic lies in the heart.`
+    category: 'FANTASY',
+    readTime: '12 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'Evermist Academy',
+        content: [
+          'In a quaint town nestled between rolling hills and dense forests stood Evermist Academy — an age-old school known for its ivy-covered walls, whispering hallways, and a curious reputation of being just a little bit different.'
+        ]
+      }
+    ]
   },
   kai: {
     id: 'kai',
     name: 'Kai',
-    title: '⚡ Kai: Rooftops & Revelations',
-    emoji: '⚡',
+    title: 'Rooftops & Revelations',
+    subtitle: 'Where thrill meets destiny',
+    author: 'Urban Legends',
     image: 'https://i.pinimg.com/736x/46/a5/e0/46a5e0f623fec0bd3cffad1a12109e15.jpg',
-    category: 'Guardian',
-    traits: ['Adventurous', 'Loyal', 'Energetic', 'Protective'],
-    story: `Kai had always been the spark in every room — the kind of guy who'd climb school rooftops, slide down railings, prank teachers (with style), and still manage to flash that disarming grin that got him out of trouble.
-
-Mischievous by nature, loyal by heart — if you were Kai's friend, you were family.
-
-He lived in the heart of Tenbasa City, a place that buzzed with life, neon lights, and endless rooftops that Kai considered his personal playground. His days were spent racing through alleyways with his crew, his nights spent watching stars from skyscraper ledges, dreaming of adventures he couldn't name.
-
-But everything changed when she arrived.
-
-Aiko — the mysterious transfer student with stormy eyes and a presence that felt... off. She didn't talk much. She didn't laugh at Kai's jokes. In fact, she seemed to see right through him — not the pranks, not the rooftop jumps, not the swagger. Just… him.
-
-Intrigued, Kai tried everything to crack her armor. Notes under her desk, choreographed flash mobs in the cafeteria, even a rooftop picnic under city lights. Nothing worked.
-
-But then, one night, he followed her. What he found shook his world.
-
-Aiko wasn't just a student. She was part of an ancient order known as the Sentinels of the Veil, guardians protecting the thin barrier between their world and something darker — a parallel realm filled with shadowbeasts born from human fear. And the barrier? It was weakening.
-
-Worse? Kai was unknowingly a key to keeping the balance.
-
-You see, long ago, a boy was born with the ability to channel energy not through magic, but through pure adrenaline — raw will, guts, and heart. That boy was Kai. His reckless stunts weren't just fun — they kept ancient seals alive. And now, the shadows were coming for him.
-
-Suddenly, Kai's life was rooftops by day, battle by night. Aiko became his reluctant trainer, teaching him how to fight, how to channel his energy, and how to trust something beyond instinct — his purpose.
-
-As the danger grew, so did their bond. Kai's wild heart found grounding in Aiko's calm, and Aiko's guarded soul found light in Kai's chaos. Together, they formed a team that danced between disaster and destiny, pulling each other back from the edge time and again.
-
-The final battle took place atop Skyline Tower, the tallest building in Tenbasa. The shadowbeasts had broken through, and the city trembled. As darkness rained, Kai stood at the ledge once again — but this time, not for show. This time, his leap would mean something.
-
-With Aiko beside him and the skyline glowing behind them, Kai dove — heart first — into the storm. Light exploded. Shadows screamed. The seal held.
-
-Peace returned, but Kai had changed. No longer just the rooftop rebel, he was a guardian. A legend. And still, somehow, the same guy who'd steal your fries and race you to the edge.
-
-Aiko stayed. And so did the rooftop picnics.
-
-Now, if you look up at Tenbasa's skyline late at night, you might see a silhouette sprinting across the rooftops, laughter echoing behind. That's Kai — still chasing thrills, still protecting the world, and still hopelessly in love with the girl who flipped his world upside down.`
+    category: 'ACTION',
+    readTime: '11 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The City Above',
+        content: [
+          'Kai had always been the spark in every room — the kind of guy who\'d climb school rooftops, slide down railings, prank teachers (with style), and still manage to flash that disarming grin that got him out of trouble.'
+        ]
+      }
+    ]
   },
   luna: {
     id: 'luna',
     name: 'Luna',
-    title: '🌙 Luna: The Silent Flame',
-    emoji: '🌙',
+    title: 'The Silent Flame',
+    subtitle: 'Where fire meets ice',
+    author: 'Winter Chronicles',
     image: 'https://i.pinimg.com/236x/6d/4a/22/6d4a2216ef416deaaabf03def93dc550.jpg',
-    category: 'Flame Bearer',
-    traits: ['Mysterious', 'Powerful', 'Compassionate', 'Strong'],
-    story: `In the snow-veiled realm of Kureha, where ancient whispers echoed through icy trees, Luna lived quietly, tucked away in a shadowed cabin beyond the village.
-
-With midnight eyes and a presence like still water, she moved unnoticed — a mystery, a myth. She was the last bearer of the Eclipsa Flame, a power feared as much as it was misunderstood.
-
-Passed through bloodlines and bound to cosmic rhythms, the Flame lived within her like a second soul — a balance of light and shadow, of healing and destruction. She had learned to hide it, to suppress the fire's whisper in her veins.
-
-Until war came.
-
-The Empire of Zareth, a power-hungry force driven by conquest, invaded her homeland. Led by the enigmatic and ruthless General Kael, they sought the Eclipsa Flame to tip the balance of power and bend nature to their will.
-
-Kael was unlike anyone Luna had ever seen — strikingly intelligent, unreadable, and frighteningly calm. He believed in order through domination. But underneath his cold demeanor was a haunting secret: Kael wasn't born of the empire… he was made by it. Raised as a weapon, taught never to feel, never to falter.
-
-The first time they met was in battle. Steel clashed. Fire answered. And in that chaos, their eyes locked — and something cracked. Not fear. Not hatred. Recognition. As if they'd seen each other in dreams they could never recall.
-
-Kael cornered her once in the mountains. He should've captured her. She should've burned him. But they hesitated. And instead of fire or chains, there was silence… then conversation… then confession.
-
-He returned again and again. Each time, they fought less. Spoke more. Discovered pieces of themselves long buried beneath duty and expectation.
-
-Luna's voice — barely heard for years — came alive in Kael's presence. And Kael, for the first time, laughed. He listened. He saw her — not the Flame, not the threat, just Luna.
-
-But love is not safe in war.
-
-When Kael's identity as Luna's secret companion was revealed, the Empire branded him a traitor. He was tortured. Nearly killed. Luna, filled with fury and sorrow, unleashed the full might of the Eclipsa Flame for the first time — not to destroy the empire, but to save him.
-
-Together, they ran — wounded, hunted, but free.
-
-In the mountains of Aetherin, Luna and Kael built something new — a sanctuary for the lost, the scarred, the powerful who refused to be controlled. They became the leaders of The Veilborn, a rebellion forged not just in battle, but in love.
-
-And when the final war came, they stood side by side. Not as enemies. Not even as lovers. But as equals — two flames burning in harmony, against a world that told them they should never have met.
-
-Years later, children would ask, 'Is it true Luna fell in love with her greatest enemy?' And the elders would smile: 'Not her enemy… her match.'`
+    category: 'FANTASY',
+    readTime: '13 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Snow Kingdom',
+        content: [
+          'In the snow-veiled realm of Kureha, where ancient whispers echoed through icy trees, Luna lived quietly, tucked away in a shadowed cabin beyond the village.'
+        ]
+      }
+    ]
   },
   vik: {
     id: 'vik',
     name: 'Vik',
-    title: '🛡️ Vik: Shadows of the Forgotten',
-    emoji: '🛡️',
+    title: 'Shadows of the Forgotten',
+    subtitle: 'A guardian\'s oath',
+    author: 'Dark Tales',
     image: 'https://i.pinimg.com/736x/44/d9/29/44d9296e901703500ad2d470008a6e24.jpg',
-    category: 'Guardian',
-    traits: ['Silent', 'Protective', 'Skilled', 'Resilient'],
-    story: `In the sprawling underground city of Droskar, where sunlight never reaches and neon lights flicker like dying stars, Vik was a name spoken in whispers.
-
-Tall, silent, with storm-gray eyes and fists like steel, he was known as The Unbroken — a man who emerged from nowhere and always walked away from fire.
-
-But Vik hadn't always been a ghost. Once, he was a boy with dreams. A son. A brother. His father was one of the last peacekeepers in a city swallowed by corruption. He stood up against the criminal syndicates when no one else dared. And they made him pay.
-
-Vik watched his home burn, his family trapped inside — helpless and screaming — while he hid beneath the floorboards. That night, Vik's world collapsed. And something inside him did too.
-
-Taken in by a rogue faction called the Ashguard, Vik was raised to survive. Fight. Endure. Every punch, every mission, every scar was a step toward becoming a weapon — one meant to protect others. But in the process, Vik forgot how to feel. He became silent. Cold. Purposeful.
-
-Until he met Mira.
-
-She was a street medic in the rebel quarter. Fierce, stubborn, always healing in a city that only knew how to destroy. She patched up Vik after a brutal mission, but it wasn't her skill that broke through to him — it was her defiance. She wasn't scared of him. She challenged his silence with kindness, his pain with patience.
-
-Bit by bit, she got through the armor.
-
-Late nights turned into long talks. Bandages turned into lingering touches. Mira didn't ask Vik to forget his past — she asked him to believe he was more than it. And for the first time in years, Vik let himself hope. He could see a different future. One with her in it.
-
-But peace was never meant to last in Droskar.
-
-A new syndicate called The Black Chain rose from the shadows — kidnapping orphaned children and turning them into mind-controlled soldiers through biotech experiments. When Mira's younger brother, Jace, was taken, Mira was shattered. And Vik? He became a storm.
-
-Fueled by rage and memories he couldn't bury, Vik tore through the Black Chain's operations one by one. He followed their trail across the lowest zones of the city, fighting soldiers enhanced beyond human limits. Every battle brought him closer to the boy — and closer to the man he never thought he could be.
-
-But the deeper he went, the more he saw reflections of himself in those broken children. He had been one of them once — a ghost forged in fire. He couldn't just rescue them. He had to free them.
-
-When Vik finally faced the Black Chain's leader — General Korr, a former Ashguard defector — the past came crashing in. Korr was the one who had trained Vik after his family's death. The one who taught him pain. The one who had sold him out.
-
-Vik had the chance to kill him. He didn't. Instead, he chose justice. He brought the general to the rebel courts. Made the city see what had been hidden for too long. That was the real revolution.
-
-Jace was saved. The children were freed. And Vik? He didn't go back to war. He and Mira left the city's depths behind. Together, they built a safe haven in the forgotten ruins — a home for the lost, the broken, the hunted.
-
-Vik became more than a warrior. He became a guardian. A father figure. A legend. He and Mira married under the old copper sky, surrounded by children they'd saved. They never had riches, but they had purpose. And love. And a future that wasn't forged in fire, but in hope.
-
-Today, when kids in Droskar are scared, they whisper stories of the man in the shadows who protects the innocent. And somewhere out there, Vik listens. Silent. Watchful. Unbroken. Still guarding a world that once forgot him.`
+    category: 'THRILLER',
+    readTime: '14 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Underground',
+        content: [
+          'In the sprawling underground city of Droskar, where sunlight never reaches and neon lights flicker like dying stars, Vik was a name spoken in whispers.'
+        ]
+      }
+    ]
   },
   blaze: {
     id: 'blaze',
     name: 'Blaze',
-    title: '🔥 Blaze: Burn the Rulebook',
-    emoji: '🔥',
+    title: 'Burn the Rulebook',
+    subtitle: 'Fire and freedom',
+    author: 'Rebel Tales',
     image: 'https://i.pinimg.com/736x/bb/2f/52/bb2f52ab166107088ef7153de6c5588a.jpg',
-    category: 'Rebel',
-    traits: ['Rebellious', 'Fearless', 'Independent', 'Fierce'],
-    story: `No one knew where Blaze came from. Rumors spread like smoke: She broke out of a maximum-security prison at thirteen. She burned down an underground arena and walked away smiling. She once hacked into the City Core just to change the skyline's color to crimson.
-
-Most of them were lies. Some weren't. But Blaze? She didn't care what they believed. She lived fast, fought dirty, and never looked back. Every breath she took defied the system, every step she made was a war cry.
-
-She had no home, no last name, and no attachments. Just a blood-red bike named Fury, a pair of fingerless gloves, and an electric lighter always sparking in her palm.
-
-But behind that reckless smirk was a truth only she knew: Blaze used to be Alira Novan, daughter of the city's most powerful tech-tyrants. The girl raised in glass towers, trained to be obedient, perfect, profitable. A pawn for a legacy of control.
-
-She had the highest scores, the perfect record, and no freedom. Until she found her brother's body. He had discovered the truth — that their family's clean empire ran on experiments, human lives, and blood buried under concrete. They silenced him. And tried to erase her.
-
-But you don't erase a wildfire.
-
-Blaze burned her name. Her face. Her past. And she ran.
-
-Now she roams the Outer Rings — a war zone of rebel factions, rogue AI, black market street crews, and freedom fighters. She makes her own rules: ride hard, fight harder, never bow.
-
-But even fire can't run forever.
-
-She meets Juno, a quiet, analytical genius building an underground resistance against the Novan Tech Syndicate. He doesn't ask questions. Doesn't flinch when he sees her scars. Just gives her a choice: 'You can keep running. Or you can burn down the world for something.'
-
-She almost punches him. But doesn't. Instead, she stays.
-
-With Juno, Blaze doesn't need to pretend. She doesn't need to hide behind fury — she can weaponize it. Together, they recruit outcasts, hackers, ex-cyborgs, even street racers turned vigilantes. They form Ashrift, a rebellion with no hierarchy, no mercy, and no brakes.
-
-Blaze becomes more than a fighter. She becomes a spark — the kind that sets systems ablaze.
-
-When the Novan Syndicate tries to shut down the city's memory archive — erasing every trace of their crimes — Blaze rides straight through the security firewall. Literally. Her bike crashes through the rooftop glass like a comet of vengeance.
-
-She stares down her mother — cold, cruel, and surrounded by drones. 'You should've killed me when you had the chance.'
-
-The city watches live as Blaze exposes every secret. Every body. Every number. She doesn't wait for applause. She walks away while the towers crumble behind her.
-
-Now, across the Outer Rings, her symbol — a flaming phoenix with a shattered collar — is spray-painted on walls, drones, helmets. Kids chant her name in underground arenas. Resistance leaders wear her colors.
-
-Blaze and Juno still ride, still fight, still kiss like it's their last day alive. But now they're not just running from the past. They're racing toward a future where no one has to live in fear.
-
-And wherever the fight is hottest, wherever the chains are tightest, you'll hear the roar of Fury, and know— Blaze was here.`
+    category: 'ACTION',
+    readTime: '10 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'Born from Fire',
+        content: [
+          'No one knew where Blaze came from. Rumors spread like smoke: She broke out of a maximum-security prison at thirteen. She burned down an underground arena and walked away smiling.'
+        ]
+      }
+    ]
   },
   zade: {
     id: 'zade',
     name: 'Zade',
-    title: '♟️ Zade: The Game of Shadows',
-    emoji: '♟️',
+    title: 'The Game of Shadows',
+    subtitle: 'Play well or be played',
+    author: 'Midnight Tales',
     image: 'https://cdn.talkie-ai.com/talkie/prod/img/abb520af-b4a5-41f6-8ca1-b750c80d1568.jpeg',
-    category: 'Strategist',
-    traits: ['Strategic', 'Intelligent', 'Charming', 'Cunning'],
-    story: `Zade wasn't born into the light. He was born beneath it — in the underground corridors of Virelia, a gleaming metropolis where the rich built towers into the clouds and the forgotten were buried beneath them.
-
-His earliest memories were of whispers, backdoor deals, and watching his father bleed out in a game he wasn't meant to win. That's when Zade learned one truth: 'Loyalty gets you killed. Strategy keeps you alive.'
-
-By sixteen, he could forge identities, break encryption codes, and lie better than most politicians. But Zade didn't just survive — he thrived. He played gangs against each other, hacked auctions in real time, and sold secrets to the highest bidder.
-
-Some called him a genius. Others called him a ghost. But everyone knew one thing — never bet against Zade.
-
-And then came The Invitation — a sleek black card slid under his door, embossed with a sigil: a serpent wrapped around a crown. It was from The Valarion Circle — an elite, underground society of power-brokers who controlled everything from politics to underground warfare.
-
-Their motto: 'Play well. Or be played.' It was a game of betrayal, power, and blood. And Zade? He was made for it.
-
-But something unexpected happened in Round Three. She happened.
-
-Her name was Selene — elegant, brilliant, dangerous. She wasn't just a player. She was a legend. Cold as the moonlight and just as untouchable. Every conversation with her was like chess with daggers.
-
-But Zade cracked her armor with his grin. And she slipped past his walls with one stolen glance.
-
-They were fire and ice — rivals, partners, maybe lovers. He couldn't be sure if she wanted to kiss him or kill him. They danced through deals, double-crossed kings, and broke into encrypted dream-vaults that held the city's memories.
-
-But the deeper Zade got into the Circle's web, the more he realized: This wasn't just a game. The Circle was planning to reset the city — wipe the lower districts clean, erase everyone without 'value,' and build a new world with only the elite.
-
-Zade had two choices: Play along, rise to power, and finally own the world that once spit him out. Or burn it all to the ground.
-
-And Selene? She was the final test. Would she join him… or betray him?
-
-In the final round, under a blood-red sky, Zade rewrote the rules. He turned the Circle's system against itself, exposed their secrets live across every screen in Virelia, and used his charm not to manipulate — but to liberate.
-
-Selene stood beside him, one pistol pointed at his head. He looked her in the eye. 'Do it. Or walk with me into something real for once.' She didn't pull the trigger.
-
-Together, they vanished.
-
-Now, Zade is a myth. A rebel. A symbol carved into glass walls — the serpent biting the crown. Some say he's building a new Circle, one run by chaos and choice, not greed and chains. Others say he and Selene live in the cloud cities, watching the game they once broke.
-
-One thing is certain: If you hear a smooth voice behind you in the dark… If your secrets start unraveling like silk… If your enemies fall without a sound… Zade's already made his move. And you were never playing the game. You were the piece.`
+    category: 'THRILLER',
+    readTime: '15 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Invitation',
+        content: [
+          'Zade wasn\'t born into the light. He was born beneath it — in the underground corridors of Virelia, a gleaming metropolis where the rich built towers into the clouds and the forgotten were buried beneath them.'
+        ]
+      }
+    ]
   },
   sky: {
     id: 'sky',
     name: 'Sky',
-    title: '🌩️ Sky: The Wildfire and the Wind',
-    emoji: '🌩️',
+    title: 'Wildfire & Wind',
+    subtitle: 'When opposites collide',
+    author: 'Sky Chronicles',
     image: 'https://i.pinimg.com/564x/1d/7d/50/1d7d50bdace5fffda5ad58a390b8d3e4.jpg',
-    category: 'Wanderer',
-    traits: ['Free-spirited', 'Wild', 'Passionate', 'Untamed'],
-    story: `Sky was a storm in motion. With hair like wildfire and eyes that burned brighter than city lights, she lived her life above the world—literally. Rooftops were her roads. The sky was her shelter.
-
-No place ever kept her, and no one ever tried. Until Arian.
-
-He was calm where she was wild. A photographer chasing silence, shadows, and the beauty of stillness. He lived in a loft filled with old records, polaroids, and books about places long gone.
-
-When their worlds collided—Sky crashing through his skylight during a storm, bleeding and breathless—he should've been terrified. But he looked at her like she belonged there.
-
-'I'm not staying,' she warned him. 'I didn't ask you to,' he replied, as he stitched her wound with shaking hands.
-
-But she stayed. For a night. Then two. Then a week.
-
-Something about Arian slowed her down. Not stopped—never stopped—but softened the edges she didn't know she had. And in turn, Sky brought color back into his world. She danced barefoot in the rain, painted messages on his rooftop, taught him to feel the wind before it changed.
-
-Their love didn't explode like fireworks—it simmered, warm and magnetic. A thousand unspoken touches. A look across the room that said I see you. A kiss on the collarbone when words weren't enough.
-
-She still ran—but now, she came back. Every time.
-
-Their bodies learned each other like poetry—every scar, every sigh, every curve and hesitation. And when the nights got colder, and memories clawed at her ribs, Arian didn't pull her closer—he let her choose him. And she did. Again and again.
-
-But Sky's past had sharp teeth. A group she once escaped—the Vex—was hunting her. Not for revenge, but for what she held inside: a rare form of kinetic energy that turned adrenaline into power. They didn't want to hurt her. They wanted to use her.
-
-Arian refused to let that happen. So together, they ran. Across countries, through forests, under stars. And somewhere between the chaos, they stopped pretending it wasn't love.
-
-One night, in a moonlit field far from the city, Sky finally whispered, 'You make me want to stay.' He didn't say anything. Just kissed her knuckles and rested his forehead to hers. That was enough.
-
-Years passed. Sky and Arian became more than fugitives. They became a myth. A legend of the girl who danced with lightning, and the man who captured her fire with a camera lens.
-
-They built a new home—high above a forgotten coastline, where storms rolled in like poetry. And when their daughter was born, she came into the world during a thunderstorm—laughing. Just like her mother.`
-  },
-  rex: {
-    id: 'rex',
-    name: 'Rex',
-    title: '🏍️ Rex: The Pulse Beneath the Chaos',
-    emoji: '🏍️',
-    image: 'https://i.pinimg.com/736x/f9/0f/e3/f90fe34c5a50fec1bcd0b4cfa354cdef.jpg',
-    category: 'Leader',
-    traits: ['Leader', 'Confident', 'Bold', 'Charismatic'],
-    story: `Rex lived life at full throttle. From underground races to rooftop chases, he was always running—from the past, from the truth, from the silence that came when the engine stopped.
-
-Adrenaline wasn't just his drug—it was his identity.
-
-But even chaos has roots. And Rex's began with a name: Rael—his twin brother. They were once inseparable. Two sides of the same fire. But when they were fourteen, Rael vanished during a raid on their home. Government agents, masked, faceless, left only smoke and questions behind.
-
-Since that day, Rex had one mission: Find him. No matter the cost.
-
-Years later, Rex had become a legend on the streets. Fastest bike courier in the city. Uncatchable. Untouchable. But then came the message. A single glitchy video, anonymous sender. One line: 'Rael is alive.'
-
-The sender? Nyra—a codebreaker with a haunted past and a voice like static in the wind. She didn't trust people. Rex didn't follow rules. And yet, from the moment they met in a stolen hovercar under neon lights, something clicked.
-
-They became partners. Then something more.
-
-Nyra had data. Rex had instincts. Together, they unraveled a conspiracy: Project Ashen. A covert program that kidnapped children with neural acceleration genes. Children like Rex and Rael. Only Rex had escaped. Rael hadn't.
-
-And now... Rael wasn't a prisoner. He was leading the project. Transformed. Enhanced. Controlled.
-
-Their final confrontation wasn't a battle—it was a collision. Of memories, of pain, of two brothers standing on opposite sides of the same tragedy.
-
-'Rex,' Rael said, voice low and cold, 'you don't understand what I've become.' 'No,' Rex replied, stepping forward. 'I understand exactly. That's why I'm not leaving without you.'
-
-The fight tore through city skylines—steel, fire, shattered glass. But it wasn't fists or bullets that broke through Rael's control. It was a memory. A song they used to hum as kids. Something only he would remember.
-
-Nyra played it on a loop, echoing through comms. Rael dropped his weapon. His eyes—once robotic—flickered. And just like that, the system glitched.
-
-They took Rael home. Months passed. The world didn't change overnight. But the three of them—Rex, Rael, and Nyra—built something real. A safehouse. A team. A promise to protect other lost souls hunted by the same machine.
-
-Rex still raced. Still burned rubber and tasted wind at 200mph. But now, when the engine roared, it wasn't to drown out the silence. It was a heartbeat. A reminder that he was alive.`
+    category: 'ROMANCE',
+    readTime: '12 min read',
+    chapters: [
+      {
+        number: 1,
+        title: 'The Storm',
+        content: [
+          'Sky was a storm in motion. With hair like wildfire and eyes that burned brighter than city lights, she lived her life above the world—literally.'
+        ]
+      }
+    ]
   }
 }
 
 const StoryPage = () => {
   const { id } = useParams<{ id: string }>()
-  const [readProgress, setReadProgress] = useState(0)
-  
-  const story = stories[id || ''] || stories.lexi
+  const navigate = useNavigate()
+  const [currentChapter, setCurrentChapter] = useState(0)
+  const [liked, setLiked] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      const scrollTop = window.scrollY
-      const progress = (scrollTop / (documentHeight - windowHeight)) * 100
-      setReadProgress(progress)
-    }
+  const story = id ? stories[id] : null
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  if (!story) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FAF7F2' }}>
+        <div className="text-center">
+          <h2 className="text-3xl font-serif mb-4" style={{ color: '#1A1A1A' }}>Story not found</h2>
+          <Link to="/discover">
+            <button className="px-6 py-3 rounded-md" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
+              Back to Stories
+            </button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
-  // Calculate read time (200 words per minute)
-  const wordCount = story.story.split(/\s+/).length
-  const readTime = Math.ceil(wordCount / 200)
+  const chapter = story.chapters[currentChapter]
+  const isFirstChapter = currentChapter === 0
+  const isLastChapter = currentChapter === story.chapters.length - 1
 
   return (
-    <div className="bg-white text-black min-h-screen">
-      {/* Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-gray-100 z-50">
-        <motion.div
-          className="h-full bg-black"
-          style={{ width: `${readProgress}%` }}
-        />
-      </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 overflow-hidden"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)' }}
+      >
+        {/* Close button */}
+        <button
+          onClick={() => navigate('/discover')}
+          className="fixed top-6 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)' }}
+        >
+          <X size={24} style={{ color: '#FFFFFF' }} />
+        </button>
 
-      {/* Hero Section */}
-      <div className="relative h-screen">
-        <div className="absolute inset-0">
-          <img
-            src={story.image}
-            alt={story.name}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-white" />
-        </div>
+        <div className="h-full overflow-y-auto">
+          <div className="min-h-screen flex items-center justify-center px-6 py-20">
+            <div className="max-w-6xl w-full">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl"
+                style={{ backgroundColor: '#FFFFFF' }}
+              >
+                {/* Left Side - Image */}
+                <div className="relative h-[300px] md:h-auto">
+                  <img
+                    src={story.image}
+                    alt={story.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  
+                  {/* Story meta on image */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <span 
+                      className="inline-block px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wide mb-3"
+                      style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', color: '#1A1A1A' }}
+                    >
+                      {story.category}
+                    </span>
+                    <p className="text-sm font-medium" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                      By {story.author} • {story.readTime}
+                    </p>
+                  </div>
+                </div>
 
-        <div className="relative h-full flex items-end pb-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="text-white"
-          >
-            <p className="text-sm mb-4 opacity-80">{story.category}</p>
-            <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
-              {story.name}
-            </h1>
-            <p className="text-xl md:text-2xl mb-6 opacity-90">
-              {story.title.replace(/^[🎤🎸🌸⚡🌙🛡️🔥♟️🌩️🏍️]\s+/, '').replace(/^[^:]+:\s+/, '')}
-            </p>
-            <div className="flex gap-4 text-sm opacity-75">
-              <span>{readTime} min read</span>
-              <span>•</span>
-              <span>{wordCount} words</span>
+                {/* Right Side - Story Content */}
+                <div className="flex flex-col h-[600px] md:h-[700px]">
+                  {/* Header */}
+                  <div className="px-8 py-8 border-b" style={{ borderColor: '#E5E7EB' }}>
+                    <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#9CA3AF' }}>
+                      CHAPTER {chapter.number}
+                    </p>
+                    <h1 className="text-3xl font-serif font-bold mb-2" style={{ color: '#1A1A1A' }}>
+                      {chapter.title}
+                    </h1>
+                    <p className="text-sm italic" style={{ color: '#6B7280' }}>
+                      {story.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Story Text - Scrollable */}
+                  <div className="flex-1 overflow-y-auto px-8 py-8">
+                    <motion.div
+                      key={currentChapter}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="space-y-6"
+                    >
+                      {chapter.content.map((paragraph, idx) => (
+                        <p
+                          key={idx}
+                          className="text-lg leading-relaxed font-serif"
+                          style={{ color: '#374151' }}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </motion.div>
+                  </div>
+
+                  {/* Footer - Navigation & Actions */}
+                  <div className="px-8 py-6 border-t" style={{ borderColor: '#E5E7EB' }}>
+                    {/* Chapter Navigation */}
+                    <div className="flex items-center justify-between mb-4">
+                      <button
+                        onClick={() => setCurrentChapter(prev => Math.max(0, prev - 1))}
+                        disabled={isFirstChapter}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all ${
+                          isFirstChapter ? 'opacity-30 cursor-not-allowed' : 'hover:scale-105'
+                        }`}
+                        style={{ 
+                          backgroundColor: isFirstChapter ? '#E5E7EB' : '#1A1A1A',
+                          color: '#FFFFFF'
+                        }}
+                      >
+                        <ChevronLeft size={18} />
+                        <span className="text-sm font-medium">Previous</span>
+                      </button>
+
+                      <div className="flex gap-2">
+                        {story.chapters.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setCurrentChapter(idx)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                              idx === currentChapter ? 'w-8' : ''
+                            }`}
+                            style={{ 
+                              backgroundColor: idx === currentChapter ? '#8B5CF6' : '#D1D5DB'
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          if (isLastChapter) {
+                            navigate('/discover')
+                          } else {
+                            setCurrentChapter(prev => Math.min(story.chapters.length - 1, prev + 1))
+                          }
+                        }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-md transition-all hover:scale-105"
+                        style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                      >
+                        <span className="text-sm font-medium">
+                          {isLastChapter ? 'Close book' : 'Next'}
+                        </span>
+                        {!isLastChapter && <ChevronRight size={18} />}
+                        {isLastChapter && <BookOpen size={18} />}
+                      </button>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setLiked(!liked)}
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border-2 transition-all hover:scale-105"
+                        style={{ 
+                          borderColor: liked ? '#EC4899' : '#E5E7EB',
+                          backgroundColor: liked ? '#FDF2F8' : 'transparent',
+                          color: liked ? '#EC4899' : '#6B7280'
+                        }}
+                      >
+                        <Heart size={18} fill={liked ? '#EC4899' : 'none'} />
+                        <span className="text-sm font-medium">
+                          {liked ? 'Saved' : 'Save'}
+                        </span>
+                      </button>
+
+                      <button
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border-2 transition-all hover:scale-105"
+                        style={{ borderColor: '#E5E7EB', color: '#6B7280' }}
+                      >
+                        <Share2 size={18} />
+                        <span className="text-sm font-medium">Share</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </div>
-
-      {/* Story Content */}
-      <div className="max-w-3xl mx-auto px-6 md:px-12 py-16">
-        
-        {/* Traits */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap gap-3 mb-12 pb-12 border-b border-gray-200"
-        >
-          {story.traits.map((trait) => (
-            <span
-              key={trait}
-              className="px-4 py-2 bg-gray-100 text-sm rounded-full"
-            >
-              {trait}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* Story Text */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="prose prose-lg max-w-none"
-        >
-          {story.story.split('\n\n').map((paragraph, index) => (
-            <motion.p
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ delay: index * 0.1 }}
-              className="text-gray-700 leading-relaxed mb-6 text-lg"
-            >
-              {paragraph}
-            </motion.p>
-          ))}
-        </motion.div>
-
-        {/* End Divider */}
-        <div className="my-16 text-center">
-          <div className="w-16 h-px bg-black mx-auto" />
-        </div>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center py-12 border-t border-gray-200">
-          <Link to="/characters">
-            <button className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
-              <span>←</span>
-              <span>All Characters</span>
-            </button>
-          </Link>
-          <Link to="/quiz/girl">
-            <button className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
-              Take the Quiz
-            </button>
-          </Link>
-        </div>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 
