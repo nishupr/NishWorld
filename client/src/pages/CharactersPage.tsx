@@ -54,7 +54,7 @@ const characters: Character[] = [
     emoji: '⚡',
     gender: 'male',
     category: 'Guardian',
-    image: 'https://picture.lk/files/preview/960x1713/11710586104humg5hwn8tj3klyjym0q3xsg3aqcqavfxgfnjn6vzdexsginvqie52pfpiml81lkdwjj27mthgnou4h8cyayv6inhkmikcxhmsoy.jpg',
+    image: 'https://i.pinimg.com/564x/11/71/05/11710586104humg5hwn8tj3klyjym0q3xsg3aqcqavfxgfnjn6vzdexsginvqie52pfpiml81lkdwjj27mthgnou4h8cyayv6inhkmikcxhmsoy.jpg',
     description: 'A spark in every room, he became a guardian protecting the balance between worlds.'
   },
   {
