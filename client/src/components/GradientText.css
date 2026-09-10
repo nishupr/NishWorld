@@ -1,122 +1,42 @@
 .gradient-text {
   position: relative;
   display: inline-block;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
   font-weight: inherit;
-  /* Neon glow effect */
-  filter: drop-shadow(0 0 10px currentColor);
-  animation: neon-glow 3s ease-in-out infinite;
+  /* Simple, no effects */
 }
 
-/* Hero variant - Simple theme colors with glow */
+/* Hero variant - Simple theme colors */
 .gradient-text.hero {
-  background-image: linear-gradient(
-    135deg,
-    var(--text-primary) 0%,
-    var(--text-secondary) 50%,
-    var(--text-primary) 100%
-  );
   color: var(--text-primary);
 }
 
-/* Subtle variant - Minimal elegant gradient */
+/* Subtle variant - Same as hero */
 .gradient-text.subtle {
-  background-image: linear-gradient(
-    135deg,
-    var(--text-primary) 0%,
-    var(--text-secondary) 50%,
-    var(--text-primary) 100%
-  );
   color: var(--text-primary);
 }
 
-/* Vibrant variant - Same as hero for consistency */
+/* Vibrant variant - Same as hero */
 .gradient-text.vibrant {
-  background-image: linear-gradient(
-    135deg,
-    var(--text-primary) 0%,
-    var(--text-secondary) 50%,
-    var(--text-primary) 100%
-  );
   color: var(--text-primary);
 }
 
-/* Animated gradient shift */
+/* No animations */
 .gradient-text.animated {
-  animation: neon-glow 3s ease-in-out infinite, gradient-shift 8s ease infinite;
+  /* Keep it simple */
 }
 
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Neon glow animation */
-@keyframes neon-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 5px currentColor) 
-            drop-shadow(0 0 15px currentColor) 
-            drop-shadow(0 0 30px currentColor);
-  }
-  50% {
-    filter: drop-shadow(0 0 10px currentColor) 
-            drop-shadow(0 0 25px currentColor) 
-            drop-shadow(0 0 50px currentColor);
-  }
-}
-
-/* Hover effect - intensify glow */
-.gradient-text.animated:hover {
-  filter: drop-shadow(0 0 15px currentColor) 
-          drop-shadow(0 0 30px currentColor) 
-          drop-shadow(0 0 60px currentColor) !important;
-  animation: neon-glow 1s ease-in-out infinite, gradient-shift 4s ease infinite;
-}
-
-/* Dark mode adjustments - keep it monochrome */
+/* Dark mode adjustments */
 [data-theme='dark'] .gradient-text.hero {
-  background-image: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #d1d5db 50%,
-    #ffffff 100%
-  );
   color: #ffffff;
 }
 
 [data-theme='dark'] .gradient-text.vibrant {
-  background-image: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #d1d5db 50%,
-    #ffffff 100%
-  );
   color: #ffffff;
-}
-
-/* Remove old shimmer effect */
-.gradient-text.animated::before {
-  display: none;
 }
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .gradient-text.animated {
-    animation: none;
-    filter: drop-shadow(0 0 10px currentColor);
-  }
-  
-  .gradient-text.animated:hover {
-    filter: drop-shadow(0 0 15px currentColor) !important;
+    /* Already simple */
   }
 }
